@@ -185,7 +185,6 @@ class SignUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
                     guard let profileImageURL = downloadURL?.absoluteString else {
                         print("DEBUG: Profile image URL is nil")
                         return
-                        
                     }
                 
                 // User ID
@@ -205,8 +204,6 @@ class SignUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
             })
         }
     }
-        
-        
     
     @objc func formValidation() {
         
