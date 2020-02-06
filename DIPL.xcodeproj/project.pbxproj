@@ -115,15 +115,13 @@
 		AC15716623DED413003FFC57 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				ACA2EE4A23EB63CE00D121E4 /* Login */,
+				ACA2EE4923EB63B600D121E4 /* Feed */,
+				ACA2EE4823EB636400D121E4 /* Search */,
+				ACA2EE4723EB634900D121E4 /* UploadPost */,
+				ACA2EE4B23EB63FB00D121E4 /* Notifications */,
+				ACA2EE4623EB632900D121E4 /* UserProfile */,
 				AC224A4123E583FD00F9F436 /* MainTabVC.swift */,
-				AC5A5E4E23E028B7008F258E /* LoginVC.swift */,
-				AC5A5E5323E18267008F258E /* SignUpVC.swift */,
-				AC224A4523E58CD500F9F436 /* SearchVC.swift */,
-				AC224A4323E58CAB00F9F436 /* FeedVC.swift */,
-				AC224A4723E58D1100F9F436 /* UploadPostVC.swift */,
-				AC224A4923E58D3100F9F436 /* NotificationVC.swift */,
-				ACA2EE4323EAE2AF00D121E4 /* UserProfileHeader.swift */,
-				AC224A4B23E58D5500F9F436 /* UserProfileVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -131,6 +129,7 @@
 		AC15716723DED41C003FFC57 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				ACA2EE4323EAE2AF00D121E4 /* UserProfileHeader.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -148,6 +147,55 @@
 				AC5A5E5123E02BB1008F258E /* Extensions.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		ACA2EE4623EB632900D121E4 /* UserProfile */ = {
+			isa = PBXGroup;
+			children = (
+				AC224A4B23E58D5500F9F436 /* UserProfileVC.swift */,
+			);
+			path = UserProfile;
+			sourceTree = "<group>";
+		};
+		ACA2EE4723EB634900D121E4 /* UploadPost */ = {
+			isa = PBXGroup;
+			children = (
+				AC224A4723E58D1100F9F436 /* UploadPostVC.swift */,
+			);
+			path = UploadPost;
+			sourceTree = "<group>";
+		};
+		ACA2EE4823EB636400D121E4 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				AC224A4523E58CD500F9F436 /* SearchVC.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		ACA2EE4923EB63B600D121E4 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				AC224A4323E58CAB00F9F436 /* FeedVC.swift */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
+		ACA2EE4A23EB63CE00D121E4 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				AC5A5E4E23E028B7008F258E /* LoginVC.swift */,
+				AC5A5E5323E18267008F258E /* SignUpVC.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		ACA2EE4B23EB63FB00D121E4 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				AC224A4923E58D3100F9F436 /* NotificationVC.swift */,
+			);
+			path = Notifications;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

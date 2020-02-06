@@ -1,0 +1,6 @@
+framework module Pods_DIPL {
+  umbrella header "Pods-DIPL-umbrella.h"
+
+  export *
+  module * { export * }
+}
