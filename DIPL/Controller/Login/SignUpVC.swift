@@ -182,7 +182,7 @@ class SignUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
                     
                 // Profile image URL
                 storageRef.downloadURL(completion: { (downloadURL, error) in
-                    guard let profileImageURL = downloadURL?.absoluteString else {
+                    guard let profileImageUrl = downloadURL?.absoluteString else {
                         print("DEBUG: Profile image URL is nil")
                         return
                     }
@@ -192,7 +192,7 @@ class SignUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
                 
                 let dictionaryValues = ["name": fullName,
                                         "username": username,
-                                        "profileImageURL": profileImageURL]
+                                        "profileImageUrl": profileImageUrl]
                     
                 let values = [uid: dictionaryValues]
                 

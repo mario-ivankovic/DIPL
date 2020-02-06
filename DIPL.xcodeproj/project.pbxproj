@@ -23,6 +23,7 @@
 		AC5A5E5423E18267008F258E /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A5E5323E18267008F258E /* SignUpVC.swift */; };
 		ACA2EE4423EAE2AF00D121E4 /* UserProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA2EE4323EAE2AF00D121E4 /* UserProfileHeader.swift */; };
 		ACCF43D623E32E7900678A31 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ACCF43D523E32E7900678A31 /* GoogleService-Info.plist */; };
+		ACF7F45023EC2511006A692E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF7F44F23EC2511006A692E /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		AC5A5E5323E18267008F258E /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		ACA2EE4323EAE2AF00D121E4 /* UserProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileHeader.swift; sourceTree = "<group>"; };
 		ACCF43D523E32E7900678A31 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		ACF7F44F23EC2511006A692E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		FF816FAAD8FAEE1B895F8DDC /* Pods-DIPL.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DIPL.debug.xcconfig"; path = "Target Support Files/Pods-DIPL/Pods-DIPL.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -137,6 +139,7 @@
 		AC15716823DED424003FFC57 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				ACF7F44F23EC2511006A692E /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -323,6 +326,7 @@
 				AC5A5E5423E18267008F258E /* SignUpVC.swift in Sources */,
 				AC5A5E4F23E028B7008F258E /* LoginVC.swift in Sources */,
 				AC5A5E5223E02BB1008F258E /* Extensions.swift in Sources */,
+				ACF7F45023EC2511006A692E /* User.swift in Sources */,
 				AC224A4223E583FD00F9F436 /* MainTabVC.swift in Sources */,
 				AC15715323DED3DF003FFC57 /* AppDelegate.swift in Sources */,
 				AC224A4623E58CD500F9F436 /* SearchVC.swift in Sources */,

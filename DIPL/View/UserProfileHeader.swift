@@ -10,6 +10,19 @@ import UIKit
 
 class UserProfileHeader: UICollectionViewCell {
     
+    // Declaring variable user to be a type user to have access to all attributes asociated with that user
+    var user: User? {
+        
+        didSet {
+            let fullName = user?.name
+            nameLabel.text = fullName
+            
+            guard let profileImageUrl = user?.profileImageUrl else { return }
+            
+            profileImageView.loadImage(with: profileImageUrl)
+        }
+    }
+    
     // Profile image
     let profileImageView: UIImageView = {
         let iv = UIImageView()
@@ -22,7 +35,6 @@ class UserProfileHeader: UICollectionViewCell {
     // Username label
     let nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Heath Ledger"
         label.font = UIFont.boldSystemFont(ofSize: 12)
         return label
     }()
