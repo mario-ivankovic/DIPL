@@ -24,6 +24,7 @@
 		ACA2EE4423EAE2AF00D121E4 /* UserProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA2EE4323EAE2AF00D121E4 /* UserProfileHeader.swift */; };
 		ACCF43D623E32E7900678A31 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ACCF43D523E32E7900678A31 /* GoogleService-Info.plist */; };
 		ACF7F45023EC2511006A692E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF7F44F23EC2511006A692E /* User.swift */; };
+		ACF7F45223EDD97D006A692E /* SearchUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF7F45123EDD97D006A692E /* SearchUserCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		ACA2EE4323EAE2AF00D121E4 /* UserProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileHeader.swift; sourceTree = "<group>"; };
 		ACCF43D523E32E7900678A31 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ACF7F44F23EC2511006A692E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		ACF7F45123EDD97D006A692E /* SearchUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserCell.swift; sourceTree = "<group>"; };
 		FF816FAAD8FAEE1B895F8DDC /* Pods-DIPL.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DIPL.debug.xcconfig"; path = "Target Support Files/Pods-DIPL/Pods-DIPL.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -132,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				ACA2EE4323EAE2AF00D121E4 /* UserProfileHeader.swift */,
+				ACF7F45123EDD97D006A692E /* SearchUserCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 				AC224A4423E58CAB00F9F436 /* FeedVC.swift in Sources */,
 				AC224A4A23E58D3100F9F436 /* NotificationVC.swift in Sources */,
 				AC224A4823E58D1100F9F436 /* UploadPostVC.swift in Sources */,
+				ACF7F45223EDD97D006A692E /* SearchUserCell.swift in Sources */,
 				AC224A4C23E58D5500F9F436 /* UserProfileVC.swift in Sources */,
 				AC5A5E5423E18267008F258E /* SignUpVC.swift in Sources */,
 				AC5A5E4F23E028B7008F258E /* LoginVC.swift in Sources */,

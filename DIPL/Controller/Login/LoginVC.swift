@@ -119,7 +119,7 @@ class LoginVC: UIViewController {
             
             guard let mainTabVC = UIApplication.shared.keyWindow?.rootViewController as? MainTabVC else { return }
             
-            // Configure view controllers in maintabvc
+            // Configure view controllers in mainTabVC
             mainTabVC.configureViewControllers()
             
             // Dismiss login controller
