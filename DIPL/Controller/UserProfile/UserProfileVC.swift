@@ -12,12 +12,14 @@ import Firebase
 private let reuseIdentifier = "Cell"
 private let headerIdentifier = "UserProfileHeader"
 
-class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, UserProfileHeaderDelegate {
+    
     
     // MARK: - Properties
     
     var currentUser: User?
     var userToLoadFromSearchVC: User?
+    var delegate: UserProfileHeaderDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +62,9 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
         // Declare header
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerIdentifier, for: indexPath) as! UserProfileHeader
         
+        // Set delegate
+        header.delegate = self
+        
         // Set the user in header
         if let user = self.currentUser {
             header.user = user
@@ -96,6 +101,85 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
             self.collectionView?.reloadData()
         }
         
+    }
+    
+    // MARK: - UserProfileHeader
+    
+    func handleFollowersTapped(for header: UserProfileHeader) {
+        let followVC = FollowVC()
+        followVC.viewFollowers = true
+        navigationController?.pushViewController(followVC, animated: true)
+    }
+    
+    func handleFollowingTapped(for header: UserProfileHeader) {
+        let followVC = FollowVC()
+        followVC.viewFollowing = true
+        navigationController?.pushViewController(followVC, animated: true)
+    }
+    
+    func handleEditFollowTapped(for header: UserProfileHeader) {
+        
+        guard let user = header.user else { return }
+        
+        // Edit profile controller
+        if header.editProfileFollowButton.titleLabel?.text == "Edit Profile" {/*
+            let editProfileController = EditProfileController()
+            editProfileController.user = user
+            editProfileController.userProfileController = self
+            let navigationController = UINavigationController(rootViewController: editProfileController)
+            present(navigationController, animated: true, completion: nil)
+            */
+        } else {
+            
+            // Handle user follow/unfollow
+            if header.editProfileFollowButton.titleLabel?.text == "Follow" {
+                header.editProfileFollowButton.setTitle("Following", for: .normal)
+                user.follow()
+            } else {
+                header.editProfileFollowButton.setTitle("Follow", for: .normal)
+                user.unfollow()
+            }
+        }
+    }
+    
+    func setUserStats(for header: UserProfileHeader) {
+        
+        guard let uid = header.user?.uid else { return }
+        
+        var numberOfFollowers: Int!
+        var numberOfFollowing: Int!
+        
+        // Get number of followers
+        USER_FOLLOWER_REF.child(uid).observe(.value) { (snapshot) in
+            
+            if let snapshot = snapshot.value as? Dictionary<String, AnyObject> {
+                numberOfFollowers = snapshot.count
+            } else {
+                numberOfFollowers = 0
+            }
+            
+            let attributedText = NSMutableAttributedString(string: "\(numberOfFollowers!)\n", attributes: [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 14)])
+            attributedText.append(NSAttributedString(string: "followers", attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 14),
+                NSAttributedStringKey.foregroundColor: UIColor.lightGray]))
+            
+            header.followersLabel.attributedText = attributedText
+        }
+        
+        // Get number of following
+        USER_FOLLOWING_REF.child(uid).observe(.value) { (snapshot) in
+            
+            if let snapshot = snapshot.value as? Dictionary<String, AnyObject> {
+                numberOfFollowing = snapshot.count
+            } else {
+                numberOfFollowing = 0
+            }
+            
+            let attributedText = NSMutableAttributedString(string: "\(numberOfFollowing!)\n", attributes: [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 14)])
+            attributedText.append(NSAttributedString(string: "following", attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 14),
+                NSAttributedStringKey.foregroundColor: UIColor.lightGray]))
+            
+            header.followingLabel.attributedText = attributedText
+        }
     }
     
     
