@@ -57,7 +57,7 @@ class SearchVC: UITableViewController {
         
         
         // Passes user from searchVC to userProfileVC
-        userProfileVC.userToLoadFromSearchVC = user
+        userProfileVC.user = user
         
         // Push view controller
         navigationController?.pushViewController(userProfileVC, animated: true)
