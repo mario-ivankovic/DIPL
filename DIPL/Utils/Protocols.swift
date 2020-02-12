@@ -16,3 +16,9 @@ protocol UserProfileHeaderDelegate {
     func handleFollowingTapped(for header: UserProfileHeader)
     
 }
+
+protocol FollowCellDelegate {
+    
+    func handleFollowTapped(for cell: FollowCell)
+    
+}

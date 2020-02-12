@@ -33,7 +33,6 @@ class FeedVC: UICollectionViewController {
         return 0
     }
 
-
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
         return 0
@@ -82,11 +81,9 @@ class FeedVC: UICollectionViewController {
             
         }))
         
-        
         // Cancel action
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         present(alertController, animated: true, completion: nil)
     }
-
 }

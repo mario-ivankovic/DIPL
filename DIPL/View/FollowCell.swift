@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import Firebase
 
 class FollowCell: UITableViewCell {
     
     
     // MARK: - Properties
+    
+    var delegate: FollowCellDelegate?
     
     var user: User? {
         
@@ -26,6 +29,33 @@ class FollowCell: UITableViewCell {
             self.textLabel?.text = username
             
             self.detailTextLabel?.text = fullName
+            
+            // Hide follow button for current user
+            if user?.uid == Auth.auth().currentUser?.uid {
+                followButton.isHidden = true
+            }
+            
+            user?.checkIfUserIsFollowed(completion: { (followed) in
+                
+                if followed {
+                    
+                    // Configure follow button for followed user
+                    self.followButton.setTitle("Following", for: .normal)
+                    self.followButton.setTitleColor(.black, for: .normal)
+                    self.followButton.layer.borderWidth = 0.5
+                    self.followButton.layer.borderColor = UIColor.lightGray.cgColor
+                    self.followButton.backgroundColor = .white
+                    
+                } else {
+                    
+                    // Configure follow button for non followed user
+                    self.followButton.setTitle("Follow", for: .normal)
+                    self.followButton.setTitleColor(.white, for: .normal)
+                    self.followButton.layer.borderWidth = 0
+                    self.followButton.backgroundColor = UIColor(red: 17/255, green: 154/255, blue: 237/255, alpha: 1)
+
+                }
+            })
         }
     }
     
@@ -49,7 +79,7 @@ class FollowCell: UITableViewCell {
     // MARK: - Handlers
     
     @objc func handleFollowTapped() {
-        
+        delegate?.handleFollowTapped(for: self)
     }
     
     // MARK: - Init
@@ -69,6 +99,8 @@ class FollowCell: UITableViewCell {
         textLabel?.text = "Username"
         
         detailTextLabel?.text = "Full name"
+        
+        self.selectionStyle = .none
         
     }
     

@@ -154,8 +154,6 @@ class UserProfileHeader: UICollectionViewCell {
         delegate?.handleEditFollowTapped(for: self)
     }
     
-    // MARK: - Functions
-    
     func configureBottomToolBar() {
         let topDividerView = UIView()
         topDividerView.backgroundColor = .lightGray

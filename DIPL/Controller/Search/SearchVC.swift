@@ -55,7 +55,6 @@ class SearchVC: UITableViewController {
         // Create instance of user profile vc
         let userProfileVC = UserProfileVC(collectionViewLayout: UICollectionViewFlowLayout())
         
-        
         // Passes user from searchVC to userProfileVC
         userProfileVC.user = user
         
@@ -65,11 +64,13 @@ class SearchVC: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! SearchUserCell
         
         cell.user = users[indexPath.row]
         
         return cell
+        
     }
     
     // MARK: - Handlers
@@ -87,19 +88,11 @@ class SearchVC: UITableViewController {
             // Grabing user id so we can construct our user
             let uid = snapshot.key
             
-            // Snapshot value cast as dictionary
-            guard let dictionary = snapshot.value as? Dictionary<String, AnyObject> else { return }
-            
-            // Construct user
-            let user = User(uid: uid, dictionary: dictionary)
-            
-            // Append user to data source
-            self.users.append(user)
-            
-            // Reload our table view
-            self.tableView.reloadData()
-
+            Database.fetchUser(with: uid, completion: { (user) in
+                
+                self.users.append(user)
+                self.tableView.reloadData()
+            })
         }
-        
     }
 }

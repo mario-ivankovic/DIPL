@@ -125,6 +125,7 @@ class SignUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         plusPhotoButton.setImage(profileImage.withRenderingMode(.alwaysOriginal), for: .normal)
         
         self.dismiss(animated: true, completion: nil)
+        
     }
     
     @objc func handleSelectorProfilePhoto () {
@@ -229,6 +230,7 @@ class SignUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         
         signUpButton.isEnabled = true
         signUpButton.backgroundColor = UIColor(red: 17/255, green: 154/255, blue: 237/255, alpha: 1)
+        
     }
     
     func configureViewComponents() {
@@ -242,5 +244,6 @@ class SignUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         // Adding stackview to our view
         view.addSubview(stackView)
         stackView.anchor(top: plusPhotoButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 30, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 240)
+        
     }
 }

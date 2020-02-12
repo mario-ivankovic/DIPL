@@ -91,6 +91,7 @@ class LoginVC: UIViewController {
         
         view.addSubview(dontHaveAccountButton)
         dontHaveAccountButton.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 50)
+        
     }
     
     @objc func handleShowSignUp() {
@@ -124,6 +125,7 @@ class LoginVC: UIViewController {
             
             // Dismiss login controller
             self.dismiss(animated: true, completion: nil)
+            
         }
     }
     
@@ -143,6 +145,7 @@ class LoginVC: UIViewController {
         // Handle case for condition were met
         loginButton.isEnabled = true
         loginButton.backgroundColor = UIColor(red: 17/255, green: 154/255, blue: 237/255, alpha: 1)
+        
     }
     
     func configureViewComponents() {
@@ -156,6 +159,6 @@ class LoginVC: UIViewController {
         // Adding stackview to our view
         view.addSubview(stackView)
         stackView.anchor(top: logoContainterView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 40, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 140)
+        
     }
-
 }
