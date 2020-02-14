@@ -154,7 +154,7 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
             }
             
             let attributedText = NSMutableAttributedString(string: "\(numberOfFollowers!)\n", attributes: [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 14)])
-            attributedText.append(NSAttributedString(string: "followers", attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 14),
+            attributedText.append(NSAttributedString(string: "Followers", attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 14),
                 NSAttributedStringKey.foregroundColor: UIColor.lightGray]))
             
             header.followersLabel.attributedText = attributedText
@@ -170,7 +170,7 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
             }
             
             let attributedText = NSMutableAttributedString(string: "\(numberOfFollowing!)\n", attributes: [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 14)])
-            attributedText.append(NSAttributedString(string: "following", attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 14),
+            attributedText.append(NSAttributedString(string: "Following", attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 14),
                 NSAttributedStringKey.foregroundColor: UIColor.lightGray]))
             
             header.followingLabel.attributedText = attributedText

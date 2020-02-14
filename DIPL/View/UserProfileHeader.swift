@@ -57,7 +57,7 @@ class UserProfileHeader: UICollectionViewCell {
         label.numberOfLines = 0
         label.textAlignment = .center
         let attributedText = NSMutableAttributedString(string: "5\n", attributes: [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 14)])
-        attributedText.append(NSAttributedString(string: "posts", attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 14),
+        attributedText.append(NSAttributedString(string: "Posts", attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 14),
             NSAttributedStringKey.foregroundColor: UIColor.lightGray]))
         label.attributedText = attributedText
         
@@ -71,7 +71,7 @@ class UserProfileHeader: UICollectionViewCell {
         label.textAlignment = .center
         
         let attributedText = NSMutableAttributedString(string: "\n", attributes: [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 14)])
-        attributedText.append(NSAttributedString(string: "followers", attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 14),
+        attributedText.append(NSAttributedString(string: "Followers", attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 14),
             NSAttributedStringKey.foregroundColor: UIColor.lightGray]))
         label.attributedText = attributedText
         
@@ -91,7 +91,7 @@ class UserProfileHeader: UICollectionViewCell {
         label.textAlignment = .center
         
         let attributedText = NSMutableAttributedString(string: "\n", attributes: [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 14)])
-        attributedText.append(NSAttributedString(string: "following", attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 14),
+        attributedText.append(NSAttributedString(string: "Following", attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 14),
             NSAttributedStringKey.foregroundColor: UIColor.lightGray]))
         label.attributedText = attributedText
         
@@ -170,7 +170,7 @@ class UserProfileHeader: UICollectionViewCell {
         addSubview(topDividerView)
         addSubview(bottomDividerView)
         
-        stackView.anchor(top: nil, left: leftAnchor, bottom: self.bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 50)
+        stackView.anchor(top: nil, left: leftAnchor, bottom: self.bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: -25, paddingRight: 0, width: 0, height: 50)
         
         topDividerView.anchor(top: stackView.topAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0.5)
         
@@ -228,7 +228,7 @@ class UserProfileHeader: UICollectionViewCell {
         
         // Profile view
         addSubview(profileImageView)
-        profileImageView.anchor(top: self.topAnchor, left: self.leftAnchor, bottom: nil, right: nil, paddingTop: 16, paddingLeft: 12, paddingBottom: 0, paddingRight: 0, width: 80 , height: 80)
+        profileImageView.anchor(top: self.topAnchor, left: self.leftAnchor, bottom: nil, right: nil, paddingTop: 16, paddingLeft: 12, paddingBottom: 0, paddingRight: 0, width: 120 , height: 120)
         profileImageView.layer.cornerRadius = 80 / 2
         
         // Username view
