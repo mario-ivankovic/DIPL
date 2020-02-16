@@ -24,6 +24,9 @@
 		AC5A5E5223E02BB1008F258E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A5E5123E02BB1008F258E /* Extensions.swift */; };
 		AC5A5E5423E18267008F258E /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A5E5323E18267008F258E /* SignUpVC.swift */; };
 		AC62D02B23F0BE5B0042A0EA /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC62D02A23F0BE5B0042A0EA /* Protocols.swift */; };
+		AC6561BB23F73022008CF443 /* SelectImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6561BA23F73022008CF443 /* SelectImageVC.swift */; };
+		AC6561BD23F730DA008CF443 /* SelectPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6561BC23F730DA008CF443 /* SelectPhotoCell.swift */; };
+		AC6561BF23F7313F008CF443 /* SelectPhotoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6561BE23F7313F008CF443 /* SelectPhotoHeader.swift */; };
 		ACA2EE4423EAE2AF00D121E4 /* UserProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA2EE4323EAE2AF00D121E4 /* UserProfileHeader.swift */; };
 		ACAFCEBD23F1F4D100DAC757 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAFCEBC23F1F4D100DAC757 /* Constants.swift */; };
 		ACAFCEC123F1FC2800DAC757 /* EditProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAFCEC023F1FC2800DAC757 /* EditProfileController.swift */; };
@@ -53,6 +56,9 @@
 		AC5A5E5123E02BB1008F258E /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		AC5A5E5323E18267008F258E /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		AC62D02A23F0BE5B0042A0EA /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		AC6561BA23F73022008CF443 /* SelectImageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectImageVC.swift; sourceTree = "<group>"; };
+		AC6561BC23F730DA008CF443 /* SelectPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPhotoCell.swift; sourceTree = "<group>"; };
+		AC6561BE23F7313F008CF443 /* SelectPhotoHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPhotoHeader.swift; sourceTree = "<group>"; };
 		ACA2EE4323EAE2AF00D121E4 /* UserProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileHeader.swift; sourceTree = "<group>"; };
 		ACAFCEBC23F1F4D100DAC757 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		ACAFCEC023F1FC2800DAC757 /* EditProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileController.swift; sourceTree = "<group>"; };
@@ -146,6 +152,8 @@
 				ACA2EE4323EAE2AF00D121E4 /* UserProfileHeader.swift */,
 				ACF7F45123EDD97D006A692E /* SearchUserCell.swift */,
 				AC27B72023F2D21B00D31B35 /* FollowCell.swift */,
+				AC6561BC23F730DA008CF443 /* SelectPhotoCell.swift */,
+				AC6561BE23F7313F008CF443 /* SelectPhotoHeader.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -182,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				AC224A4723E58D1100F9F436 /* UploadPostVC.swift */,
+				AC6561BA23F73022008CF443 /* SelectImageVC.swift */,
 			);
 			path = UploadPost;
 			sourceTree = "<group>";
@@ -349,10 +358,13 @@
 				AC5A5E5223E02BB1008F258E /* Extensions.swift in Sources */,
 				AC62D02B23F0BE5B0042A0EA /* Protocols.swift in Sources */,
 				ACF7F45023EC2511006A692E /* User.swift in Sources */,
+				AC6561BB23F73022008CF443 /* SelectImageVC.swift in Sources */,
+				AC6561BF23F7313F008CF443 /* SelectPhotoHeader.swift in Sources */,
 				AC27B71F23F2D18500D31B35 /* FollowVC.swift in Sources */,
 				AC224A4223E583FD00F9F436 /* MainTabVC.swift in Sources */,
 				AC15715323DED3DF003FFC57 /* AppDelegate.swift in Sources */,
 				AC27B72123F2D21B00D31B35 /* FollowCell.swift in Sources */,
+				AC6561BD23F730DA008CF443 /* SelectPhotoCell.swift in Sources */,
 				AC224A4623E58CD500F9F436 /* SearchVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
