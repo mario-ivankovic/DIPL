@@ -18,13 +18,20 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
     // MARK: - Properties
     
     var user: User?
+    var posts = [Post]()
+    var currentKey: String?
+    
+    // MARK: - Init
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView!.register(UserPostCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView!.register(UserProfileHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerIdentifier)
+        
+        // Configure refresh control
+        configureRefreshControl()
         
         // Background color
         self.collectionView?.backgroundColor = .white
@@ -34,24 +41,38 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
             fetchCurrentUserData()
         }
         
+        // Fetch posts
+        fetchPosts()
+        
     }
-
-    // MARK: - UICollectionViewDataSource
-
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-
+    
+    // MARK: - UICollectionViewFlowLayout
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 1
     }
-
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return 0
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = (view.frame.width - 2) / 3
+        return CGSize(width: width, height: width)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        
-        return CGSize(width: view.frame.width, height: 200)
-        
+        return CGSize(width: view.frame.width, height: 320)
+    }
+    
+    // MARK: - UICollectionView
+    
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+           return 1
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return posts.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -72,28 +93,11 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! UserPostCell
+        
+        cell.post = posts[indexPath.item]
     
         return cell
-    }
-    
-    // MARK: - API
-    
-    // Retrieving information from database
-    func fetchCurrentUserData() {
-        
-        guard let currentUid = Auth.auth().currentUser?.uid else { return }
-        
-        // Path to database
-        Database.database().reference().child("users").child(currentUid).observeSingleEvent(of: .value) { (snapshot) in
-            guard let dictionary = snapshot.value as? Dictionary<String, AnyObject> else { return }
-            let uid = snapshot.key
-            let user = User(uid: uid, dictionary: dictionary)
-            self.user = user
-            self.navigationItem.title = user.username
-            self.collectionView?.reloadData()
-        }
-        
     }
     
     // MARK: - UserProfileHeader
@@ -118,12 +122,13 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
         
         // Edit profile controller
         if header.editProfileFollowButton.titleLabel?.text == "Edit Profile" {/*
+            
             let editProfileController = EditProfileController()
             editProfileController.user = user
             editProfileController.userProfileController = self
             let navigationController = UINavigationController(rootViewController: editProfileController)
             present(navigationController, animated: true, completion: nil)
-            */
+           */
         } else {
             
             // Handle user follow/unfollow
@@ -153,8 +158,8 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
                 numberOfFollowers = 0
             }
             
-            let attributedText = NSMutableAttributedString(string: "\(numberOfFollowers!)\n", attributes: [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 14)])
-            attributedText.append(NSAttributedString(string: "Followers", attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 14),
+            let attributedText = NSMutableAttributedString(string: "\(numberOfFollowers!)\n", attributes: [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 12)])
+            attributedText.append(NSAttributedString(string: "Followers", attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 12),
                 NSAttributedStringKey.foregroundColor: UIColor.lightGray]))
             
             header.followersLabel.attributedText = attributedText
@@ -169,14 +174,97 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
                 numberOfFollowing = 0
             }
             
-            let attributedText = NSMutableAttributedString(string: "\(numberOfFollowing!)\n", attributes: [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 14)])
-            attributedText.append(NSAttributedString(string: "Following", attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 14),
+            let attributedText = NSMutableAttributedString(string: "\(numberOfFollowing!)\n", attributes: [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 12)])
+            attributedText.append(NSAttributedString(string: "Following", attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 12),
                 NSAttributedStringKey.foregroundColor: UIColor.lightGray]))
             
             header.followingLabel.attributedText = attributedText
         }
+        
+        // Get number of posts
+        USER_POSTS_REF.child(uid).observeSingleEvent(of: .value) { (snapshot) in
+            guard let snapshot = snapshot.children.allObjects as? [DataSnapshot] else { return }
+            let postCount = snapshot.count
+            
+            let attributedText = NSMutableAttributedString(string: "\(postCount)\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 12)])
+            attributedText.append(NSAttributedString(string: "Posts", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12), NSAttributedString.Key.foregroundColor: UIColor.lightGray]))
+            
+            header.postsLabel.attributedText = attributedText
+            }
     }
     
+    // MARK: - Handlers
+    @objc func handleRefresh() {
+        posts.removeAll(keepingCapacity: false)
+        self.currentKey = nil
+        fetchPosts()
+        collectionView?.reloadData()
+    }
     
-
+    func configureRefreshControl() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+        collectionView?.refreshControl = refreshControl
+    }
+    
+    // MARK: - API
+    
+    func fetchPosts() {
+        
+        var uid: String!
+        
+        if let user = self.user {
+            uid = user.uid
+        } else {
+            uid = Auth.auth().currentUser?.uid
+        }
+        USER_POSTS_REF.child(uid).observe(.childAdded) { (snapshot) in
+            
+            let postId = snapshot.key
+            
+            POSTS_REF.child(postId).observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                guard let dictionary = snapshot.value as? Dictionary<String, AnyObject> else { return }
+                
+                let post = Post(postId: postId, user: self.user!, dictionary: dictionary)
+                
+                self.posts.append(post)
+                
+                self.posts.sort(by: { (post1, post2) -> Bool in
+                    return post1.creationDate > post2.creationDate
+                })
+                
+                self.collectionView?.reloadData()
+            })
+        }
+    }
+    
+    func fetchPost(withPostId postId: String) {
+        Database.fetchPost(with: postId) { (post) in
+            
+            self.posts.append(post)
+            
+            self.posts.sort(by: { (post1, post2) -> Bool in
+                return post1.creationDate > post2.creationDate
+            })
+            self.collectionView?.reloadData()
+        }
+    }
+    
+    // Retrieving information from database
+    func fetchCurrentUserData() {
+        
+        guard let currentUid = Auth.auth().currentUser?.uid else { return }
+        
+        // Path to database
+    Database.database().reference().child("users").child(currentUid).observeSingleEvent(of: .value) { (snapshot) in
+            guard let dictionary = snapshot.value as? Dictionary<String, AnyObject> else { return }
+            let uid = snapshot.key
+            let user = User(uid: uid, dictionary: dictionary)
+            self.user = user
+            self.navigationItem.title = user.username
+            self.collectionView?.reloadData()
+        }
+        
+    }
 }

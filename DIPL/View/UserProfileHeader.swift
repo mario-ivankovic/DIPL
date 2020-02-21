@@ -36,8 +36,8 @@ class UserProfileHeader: UICollectionViewCell {
     }
     
     // Profile image
-    let profileImageView: UIImageView = {
-        let iv = UIImageView()
+    let profileImageView: CustomImageView = {
+        let iv = CustomImageView()
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         iv.backgroundColor = .lightGray
@@ -47,7 +47,8 @@ class UserProfileHeader: UICollectionViewCell {
     // Username label
     let nameLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 12)
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.textAlignment = .center
         return label
     }()
     
@@ -56,8 +57,8 @@ class UserProfileHeader: UICollectionViewCell {
         let label = UILabel()
         label.numberOfLines = 0
         label.textAlignment = .center
-        let attributedText = NSMutableAttributedString(string: "5\n", attributes: [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 14)])
-        attributedText.append(NSAttributedString(string: "Posts", attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 14),
+        let attributedText = NSMutableAttributedString(string: "\n", attributes: [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 12)])
+        attributedText.append(NSAttributedString(string: "Posts", attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 12),
             NSAttributedStringKey.foregroundColor: UIColor.lightGray]))
         label.attributedText = attributedText
         
@@ -70,8 +71,8 @@ class UserProfileHeader: UICollectionViewCell {
         label.numberOfLines = 0
         label.textAlignment = .center
         
-        let attributedText = NSMutableAttributedString(string: "\n", attributes: [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 14)])
-        attributedText.append(NSAttributedString(string: "Followers", attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 14),
+        let attributedText = NSMutableAttributedString(string: "\n", attributes: [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 12)])
+        attributedText.append(NSAttributedString(string: "Followers", attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 12),
             NSAttributedStringKey.foregroundColor: UIColor.lightGray]))
         label.attributedText = attributedText
         
@@ -90,8 +91,8 @@ class UserProfileHeader: UICollectionViewCell {
         label.numberOfLines = 0
         label.textAlignment = .center
         
-        let attributedText = NSMutableAttributedString(string: "\n", attributes: [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 14)])
-        attributedText.append(NSAttributedString(string: "Following", attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 14),
+        let attributedText = NSMutableAttributedString(string: "\n", attributes: [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 12)])
+        attributedText.append(NSAttributedString(string: "Following", attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 12),
             NSAttributedStringKey.foregroundColor: UIColor.lightGray]))
         label.attributedText = attributedText
         
@@ -108,7 +109,7 @@ class UserProfileHeader: UICollectionViewCell {
     lazy var editProfileFollowButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Loading", for: .normal)
-        button.layer.cornerRadius = 5
+        button.layer.cornerRadius = 3
         button.layer.borderColor = UIColor.lightGray.cgColor
         button.layer.borderWidth = 0.5
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
@@ -154,7 +155,12 @@ class UserProfileHeader: UICollectionViewCell {
         delegate?.handleEditFollowTapped(for: self)
     }
     
+    func setUserStats(for user: User?) {
+        delegate?.setUserStats(for: self)
+    }
+    
     func configureBottomToolBar() {
+        
         let topDividerView = UIView()
         topDividerView.backgroundColor = .lightGray
         
@@ -170,11 +176,12 @@ class UserProfileHeader: UICollectionViewCell {
         addSubview(topDividerView)
         addSubview(bottomDividerView)
         
-        stackView.anchor(top: nil, left: leftAnchor, bottom: self.bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: -25, paddingRight: 0, width: 0, height: 50)
+        stackView.anchor(top: nil, left: leftAnchor, bottom: self.bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 50)
         
         topDividerView.anchor(top: stackView.topAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0.5)
         
         bottomDividerView.anchor(top: stackView.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0.5)
+        
     }
     
     
@@ -186,12 +193,8 @@ class UserProfileHeader: UICollectionViewCell {
         stackView.distribution = .fillEqually
         
         addSubview(stackView)
-        stackView.anchor(top: self.topAnchor, left: profileImageView.rightAnchor, bottom: nil, right: rightAnchor, paddingTop: 12, paddingLeft: 12, paddingBottom: 0, paddingRight: 12, width: 0, height: 50)
+        stackView.anchor(top: nameLabel.topAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 20, paddingLeft: 12, paddingBottom: 0, paddingRight: 12, width: 0, height: 50)
         
-    }
-    
-    func setUserStats(for user: User?) {
-        delegate?.setUserStats(for: self)
     }
     
     func configureEditProfileFollowButton() {
@@ -226,20 +229,20 @@ class UserProfileHeader: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        // Profile view
+        // Profile image view
         addSubview(profileImageView)
-        profileImageView.anchor(top: self.topAnchor, left: self.leftAnchor, bottom: nil, right: nil, paddingTop: 16, paddingLeft: 12, paddingBottom: 0, paddingRight: 0, width: 120 , height: 120)
-        profileImageView.layer.cornerRadius = 80 / 2
+        profileImageView.anchor(top: self.topAnchor, left: self.leftAnchor, bottom: nil, right: self.rightAnchor, paddingTop: 16, paddingLeft: 12, paddingBottom: 0, paddingRight: 12, width: 80 , height: 120)
+        profileImageView.layer.cornerRadius = 20 / 2
         
         // Username view
         addSubview(nameLabel)
-        nameLabel.anchor(top: profileImageView.bottomAnchor, left: self.leftAnchor, bottom: nil, right: nil, paddingTop: 12, paddingLeft: 12, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        nameLabel.anchor(top: profileImageView.bottomAnchor, left: self.leftAnchor, bottom: nil, right: self.rightAnchor, paddingTop: 12, paddingLeft: 12, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         
         configureUserStats()
         
         // Edit button view
         addSubview(editProfileFollowButton)
-        editProfileFollowButton.anchor(top: postsLabel.bottomAnchor, left: postsLabel.leftAnchor, bottom: nil, right: self.rightAnchor, paddingTop: 12, paddingLeft: 8, paddingBottom: 0, paddingRight: 12, width: 0, height: 30)
+        editProfileFollowButton.anchor(top: postsLabel.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 2, paddingLeft: 35, paddingBottom: 0, paddingRight: 35, width: 0, height: 30)
         
         configureBottomToolBar()
     }
@@ -247,5 +250,4 @@ class UserProfileHeader: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }

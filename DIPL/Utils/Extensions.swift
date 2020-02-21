@@ -11,7 +11,6 @@ import Firebase
 
 extension UIView {
     
-    
     // Function that every time we call it's going to allow us to place our view components wherever we would like to on the screen
     // Based on all of these input parameters that we have set
     func anchor(top: NSLayoutYAxisAnchor?, left: NSLayoutXAxisAnchor?, bottom: NSLayoutYAxisAnchor?, right: NSLayoutXAxisAnchor?,
@@ -45,47 +44,6 @@ extension UIView {
     }
 }
 
-var imageCache = [String: UIImage]()
-
-extension UIImageView {
-    
-    // Function to load our profile image with input parameter URL string
-    func loadImage(with urlString: String) {
-        
-        // Check if image exists in cache
-        if let cachedImage = imageCache[urlString] {
-            self.image = cachedImage
-            return
-        }
-        
-        // URL for image location
-        guard let url = URL(string: urlString) else { return }
-        
-        // Fetch contents of URL
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            
-            // Handle error
-            if let error = error {
-                print("Failed to load image with error", error.localizedDescription)
-            }
-            
-            // Image data
-            guard let imageData = data else { return }
-            
-            // Create image using image data
-            let photoImage = UIImage(data: imageData)
-            
-            // Set key and value for image cache
-            imageCache[url.absoluteString] = photoImage
-            
-            // Set image
-            DispatchQueue.main.async {
-                self.image = photoImage
-            }
-        }.resume()
-    }
-}
-
 extension Database {
     
     static func fetchUser(with uid: String, completion: @escaping(User) -> ()) {
@@ -97,6 +55,19 @@ extension Database {
             let user = User(uid: uid, dictionary: dictionary)
             
             completion(user)
+        }
+    }
+    
+    static func fetchPost(with postId: String, completion: @escaping(Post) -> ()) {
+        
+        POSTS_REF.child(postId).observeSingleEvent(of: .value) { (snapshot) in
+            guard let dictionary = snapshot.value as? Dictionary<String, AnyObject> else { return }
+            guard let ownerUid = dictionary["ownerUid"] as? String else { return }
+            
+            Database.fetchUser(with: ownerUid, completion: { (user) in
+                let post = Post(postId: postId, user: user, dictionary: dictionary)
+                completion(post)
+            })
         }
     }
 }

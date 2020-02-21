@@ -27,6 +27,9 @@
 		AC6561BB23F73022008CF443 /* SelectImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6561BA23F73022008CF443 /* SelectImageVC.swift */; };
 		AC6561BD23F730DA008CF443 /* SelectPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6561BC23F730DA008CF443 /* SelectPhotoCell.swift */; };
 		AC6561BF23F7313F008CF443 /* SelectPhotoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6561BE23F7313F008CF443 /* SelectPhotoHeader.swift */; };
+		AC844F1E23F9FDC0007CE733 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC844F1D23F9FDC0007CE733 /* Post.swift */; };
+		AC844F2023FA8347007CE733 /* UserPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC844F1F23FA8347007CE733 /* UserPostCell.swift */; };
+		AC844F2223FAAA42007CE733 /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC844F2123FAAA42007CE733 /* CustomImageView.swift */; };
 		ACA2EE4423EAE2AF00D121E4 /* UserProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA2EE4323EAE2AF00D121E4 /* UserProfileHeader.swift */; };
 		ACAFCEBD23F1F4D100DAC757 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAFCEBC23F1F4D100DAC757 /* Constants.swift */; };
 		ACAFCEC123F1FC2800DAC757 /* EditProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAFCEC023F1FC2800DAC757 /* EditProfileController.swift */; };
@@ -59,6 +62,9 @@
 		AC6561BA23F73022008CF443 /* SelectImageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectImageVC.swift; sourceTree = "<group>"; };
 		AC6561BC23F730DA008CF443 /* SelectPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPhotoCell.swift; sourceTree = "<group>"; };
 		AC6561BE23F7313F008CF443 /* SelectPhotoHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPhotoHeader.swift; sourceTree = "<group>"; };
+		AC844F1D23F9FDC0007CE733 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		AC844F1F23FA8347007CE733 /* UserPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPostCell.swift; sourceTree = "<group>"; };
+		AC844F2123FAAA42007CE733 /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
 		ACA2EE4323EAE2AF00D121E4 /* UserProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileHeader.swift; sourceTree = "<group>"; };
 		ACAFCEBC23F1F4D100DAC757 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		ACAFCEC023F1FC2800DAC757 /* EditProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileController.swift; sourceTree = "<group>"; };
@@ -154,6 +160,7 @@
 				AC27B72023F2D21B00D31B35 /* FollowCell.swift */,
 				AC6561BC23F730DA008CF443 /* SelectPhotoCell.swift */,
 				AC6561BE23F7313F008CF443 /* SelectPhotoHeader.swift */,
+				AC844F1F23FA8347007CE733 /* UserPostCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -162,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				ACF7F44F23EC2511006A692E /* User.swift */,
+				AC844F1D23F9FDC0007CE733 /* Post.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -172,6 +180,7 @@
 				ACAFCEBC23F1F4D100DAC757 /* Constants.swift */,
 				AC5A5E5123E02BB1008F258E /* Extensions.swift */,
 				AC62D02A23F0BE5B0042A0EA /* Protocols.swift */,
+				AC844F2123FAAA42007CE733 /* CustomImageView.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -346,6 +355,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				ACA2EE4423EAE2AF00D121E4 /* UserProfileHeader.swift in Sources */,
+				AC844F2223FAAA42007CE733 /* CustomImageView.swift in Sources */,
+				AC844F1E23F9FDC0007CE733 /* Post.swift in Sources */,
 				ACAFCEC123F1FC2800DAC757 /* EditProfileController.swift in Sources */,
 				AC224A4423E58CAB00F9F436 /* FeedVC.swift in Sources */,
 				AC224A4A23E58D3100F9F436 /* NotificationVC.swift in Sources */,
@@ -357,6 +368,7 @@
 				AC5A5E4F23E028B7008F258E /* LoginVC.swift in Sources */,
 				AC5A5E5223E02BB1008F258E /* Extensions.swift in Sources */,
 				AC62D02B23F0BE5B0042A0EA /* Protocols.swift in Sources */,
+				AC844F2023FA8347007CE733 /* UserPostCell.swift in Sources */,
 				ACF7F45023EC2511006A692E /* User.swift in Sources */,
 				AC6561BB23F73022008CF443 /* SelectImageVC.swift in Sources */,
 				AC6561BF23F7313F008CF443 /* SelectPhotoHeader.swift in Sources */,

@@ -11,7 +11,6 @@ import Firebase
 
 class FollowCell: UITableViewCell {
     
-    
     // MARK: - Properties
     
     var delegate: FollowCellDelegate?
@@ -59,8 +58,8 @@ class FollowCell: UITableViewCell {
         }
     }
     
-    let profileImageView: UIImageView = {
-        let iv = UIImageView()
+    let profileImageView: CustomImageView = {
+        let iv = CustomImageView()
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         iv.backgroundColor = .lightGray

@@ -11,6 +11,10 @@ import Firebase
 
 class MainTabVC: UITabBarController, UITabBarControllerDelegate {
 
+    // MARK: - Properties
+    
+    let dot = UIView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -64,6 +68,9 @@ class MainTabVC: UITabBarController, UITabBarControllerDelegate {
             present(navController, animated: true, completion: nil)
             
             return false
+        } else if index == 3 {
+            dot.isHidden = true
+            return true
         }
         return true
     }
@@ -94,7 +101,5 @@ class MainTabVC: UITabBarController, UITabBarControllerDelegate {
             }
             return
         }
-        
     }
-    
 }

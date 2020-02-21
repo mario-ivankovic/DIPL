@@ -15,8 +15,8 @@ class UploadPostVC: UIViewController, UITextViewDelegate {
     
     var selectedImage: UIImage?
     
-    let photoImageView: UIImageView = {
-        let iv = UIImageView()
+    let photoImageView: CustomImageView = {
+        let iv = CustomImageView()
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         iv.backgroundColor = .blue
@@ -41,6 +41,8 @@ class UploadPostVC: UIViewController, UITextViewDelegate {
         return button
     }()
 
+    // MARK: - Init
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -73,6 +75,31 @@ class UploadPostVC: UIViewController, UITextViewDelegate {
     }
     
     // MARK: - Handlers
+    
+    func configureViewComponents() {
+        view.backgroundColor = .white
+        
+        // Photo image view
+        view.addSubview(photoImageView)
+        photoImageView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: nil, paddingTop: 92, paddingLeft: 12, paddingBottom: 0, paddingRight: 0, width: 100, height: 100)
+        
+        // Caption text view
+        view.addSubview(captionTextView)
+        captionTextView.anchor(top: view.topAnchor, left: photoImageView.rightAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 92, paddingLeft: 12, paddingBottom: 0, paddingRight: 12, width: 0, height: 100)
+        
+        // Share button
+        view.addSubview(shareButton)
+        shareButton.anchor(top: photoImageView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 12, paddingLeft: 24, paddingBottom: 0, paddingRight: 24, width: 0, height: 40)
+        
+    }
+    
+    func loadImage() {
+        
+        guard let selectedImage = self.selectedImage else { return }
+        
+        photoImageView.image = selectedImage
+        
+    }
     
     @objc func handleSharePost() {
         
@@ -112,9 +139,14 @@ class UploadPostVC: UIViewController, UITextViewDelegate {
             
                 // Post id
                 let postId = POSTS_REF.childByAutoId()
+                guard let postKey = postId.key else { return }
             
                 // Upload information to database
                 postId.updateChildValues(values, withCompletionBlock:  { (err, ref) in
+                    
+                    // Update user post structure
+                    let userPostsRef = USER_POSTS_REF.child(currentUid)
+                    userPostsRef.updateChildValues([postKey: 1])
                 
                     // Return to home feed
                     self.dismiss(animated: true, completion: {
@@ -123,29 +155,5 @@ class UploadPostVC: UIViewController, UITextViewDelegate {
                 })
             })
         }
-    }
-    
-    func configureViewComponents() {
-        
-        // Photo image view
-        view.addSubview(photoImageView)
-        photoImageView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: nil, paddingTop: 92, paddingLeft: 12, paddingBottom: 0, paddingRight: 0, width: 100, height: 100)
-        
-        // Caption text view
-        view.addSubview(captionTextView)
-        captionTextView.anchor(top: view.topAnchor, left: photoImageView.rightAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 92, paddingLeft: 12, paddingBottom: 0, paddingRight: 12, width: 0, height: 100)
-        
-        // Share button
-        view.addSubview(shareButton)
-        shareButton.anchor(top: photoImageView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 12, paddingLeft: 24, paddingBottom: 0, paddingRight: 24, width: 0, height: 40)
-        
-    }
-    
-    func loadImage() {
-        
-        guard let selectedImage = self.selectedImage else { return }
-        
-        photoImageView.image = selectedImage
-        
     }
 }

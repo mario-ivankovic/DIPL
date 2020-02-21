@@ -21,15 +21,14 @@ class SearchUserCell: UITableViewCell {
             guard let fullName = user?.name else { return }
             
             profileImageView.loadImage(with: profileImageUrl)
-            
             self.textLabel?.text = username
             
             self.detailTextLabel?.text = fullName
         }
     }
     
-    let profileImageView: UIImageView = {
-        let iv = UIImageView()
+    let profileImageView: CustomImageView = {
+        let iv = CustomImageView()
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         iv.backgroundColor = .lightGray
