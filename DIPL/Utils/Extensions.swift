@@ -65,7 +65,7 @@ extension Database {
             guard let ownerUid = dictionary["ownerUid"] as? String else { return }
             
             Database.fetchUser(with: ownerUid, completion: { (user) in
-                let post = Post(postId: postId, user: user, dictionary: dictionary)
+                let post = Post(postId: postId, dictionary: dictionary)
                 completion(post)
             })
         }

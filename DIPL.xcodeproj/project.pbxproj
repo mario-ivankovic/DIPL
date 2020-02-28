@@ -10,8 +10,9 @@
 		499685DB5D31D8C9294F07D8 /* Pods_DIPL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 505850A3B65AD7C3C6BE6DD5 /* Pods_DIPL.framework */; };
 		AC15715323DED3DF003FFC57 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC15715223DED3DF003FFC57 /* AppDelegate.swift */; };
 		AC15715A23DED3DF003FFC57 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC15715823DED3DF003FFC57 /* Main.storyboard */; };
-		AC15715C23DED3E0003FFC57 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC15715B23DED3E0003FFC57 /* Assets.xcassets */; };
 		AC15715F23DED3E0003FFC57 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC15715D23DED3E0003FFC57 /* LaunchScreen.storyboard */; };
+		AC1B2323240908A700E73FC2 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1B2322240908A700E73FC2 /* FeedCell.swift */; };
+		AC1B23252409113500E73FC2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC1B23242409113500E73FC2 /* Assets.xcassets */; };
 		AC224A4223E583FD00F9F436 /* MainTabVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC224A4123E583FD00F9F436 /* MainTabVC.swift */; };
 		AC224A4423E58CAB00F9F436 /* FeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC224A4323E58CAB00F9F436 /* FeedVC.swift */; };
 		AC224A4623E58CD500F9F436 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC224A4523E58CD500F9F436 /* SearchVC.swift */; };
@@ -44,9 +45,10 @@
 		AC15714F23DED3DF003FFC57 /* DIPL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DIPL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC15715223DED3DF003FFC57 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC15715923DED3DF003FFC57 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		AC15715B23DED3E0003FFC57 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AC15715E23DED3E0003FFC57 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AC15716023DED3E0003FFC57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AC1B2322240908A700E73FC2 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
+		AC1B23242409113500E73FC2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AC224A4123E583FD00F9F436 /* MainTabVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabVC.swift; sourceTree = "<group>"; };
 		AC224A4323E58CAB00F9F436 /* FeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedVC.swift; sourceTree = "<group>"; };
 		AC224A4523E58CD500F9F436 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
@@ -129,8 +131,8 @@
 				AC15716723DED41C003FFC57 /* View */,
 				AC15716623DED413003FFC57 /* Controller */,
 				AC15715223DED3DF003FFC57 /* AppDelegate.swift */,
+				AC1B23242409113500E73FC2 /* Assets.xcassets */,
 				AC15715823DED3DF003FFC57 /* Main.storyboard */,
-				AC15715B23DED3E0003FFC57 /* Assets.xcassets */,
 				AC15715D23DED3E0003FFC57 /* LaunchScreen.storyboard */,
 				ACCF43D523E32E7900678A31 /* GoogleService-Info.plist */,
 				AC15716023DED3E0003FFC57 /* Info.plist */,
@@ -161,6 +163,7 @@
 				AC6561BC23F730DA008CF443 /* SelectPhotoCell.swift */,
 				AC6561BE23F7313F008CF443 /* SelectPhotoHeader.swift */,
 				AC844F1F23FA8347007CE733 /* UserPostCell.swift */,
+				AC1B2322240908A700E73FC2 /* FeedCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -300,7 +303,7 @@
 			files = (
 				AC15715F23DED3E0003FFC57 /* LaunchScreen.storyboard in Resources */,
 				ACCF43D623E32E7900678A31 /* GoogleService-Info.plist in Resources */,
-				AC15715C23DED3E0003FFC57 /* Assets.xcassets in Resources */,
+				AC1B23252409113500E73FC2 /* Assets.xcassets in Resources */,
 				AC15715A23DED3DF003FFC57 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -375,6 +378,7 @@
 				AC27B71F23F2D18500D31B35 /* FollowVC.swift in Sources */,
 				AC224A4223E583FD00F9F436 /* MainTabVC.swift in Sources */,
 				AC15715323DED3DF003FFC57 /* AppDelegate.swift in Sources */,
+				AC1B2323240908A700E73FC2 /* FeedCell.swift in Sources */,
 				AC27B72123F2D21B00D31B35 /* FollowCell.swift in Sources */,
 				AC6561BD23F730DA008CF443 /* SelectPhotoCell.swift in Sources */,
 				AC224A4623E58CD500F9F436 /* SearchVC.swift in Sources */,

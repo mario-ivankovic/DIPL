@@ -226,7 +226,7 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
                 
                 guard let dictionary = snapshot.value as? Dictionary<String, AnyObject> else { return }
                 
-                let post = Post(postId: postId, user: self.user!, dictionary: dictionary)
+                let post = Post(postId: postId, dictionary: dictionary)
                 
                 self.posts.append(post)
                 

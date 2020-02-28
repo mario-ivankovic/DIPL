@@ -19,9 +19,11 @@ class LoginVC: UIViewController {
         logoImageView.contentMode = .scaleAspectFill
         view.addSubview(logoImageView)
         logoImageView.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        
         // Center our component in this view that we just created
         logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         logoImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        
         // Background color
         view.backgroundColor = UIColor(red: 0/255, green: 120/255, blue: 175/255, alpha: 1)
         
