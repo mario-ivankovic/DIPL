@@ -222,11 +222,7 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
             
             let postId = snapshot.key
             
-            POSTS_REF.child(postId).observeSingleEvent(of: .value, with: { (snapshot) in
-                
-                guard let dictionary = snapshot.value as? Dictionary<String, AnyObject> else { return }
-                
-                let post = Post(postId: postId, dictionary: dictionary)
+            Database.fetchPost(with: postId, completion: { (post) in
                 
                 self.posts.append(post)
                 
@@ -257,7 +253,7 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
         guard let currentUid = Auth.auth().currentUser?.uid else { return }
         
         // Path to database
-    Database.database().reference().child("users").child(currentUid).observeSingleEvent(of: .value) { (snapshot) in
+        Database.database().reference().child("users").child(currentUid).observeSingleEvent(of: .value) { (snapshot) in
             guard let dictionary = snapshot.value as? Dictionary<String, AnyObject> else { return }
             let uid = snapshot.key
             let user = User(uid: uid, dictionary: dictionary)
