@@ -76,6 +76,26 @@ class UploadPostVC: UIViewController, UITextViewDelegate {
     
     // MARK: - Handlers
     
+    func updateUserFeeds(with postId: String) {
+        
+        // Current user id
+        guard let currentUid = Auth.auth().currentUser?.uid else { return }
+        
+        // Database values
+        let values = [postId: 1]
+        
+        // Update follower feeds
+        USER_FOLLOWER_REF.child(currentUid).observe(.childAdded) { (snapshot) in
+            
+            let followerUid = snapshot.key
+            USER_FEED_REF.child(followerUid).updateChildValues(values)
+            
+        }
+        
+        // Update current user feed
+        USER_FEED_REF.child(currentUid).updateChildValues(values)
+    }
+    
     func configureViewComponents() {
         view.backgroundColor = .white
         
@@ -147,6 +167,9 @@ class UploadPostVC: UIViewController, UITextViewDelegate {
                     // Update user post structure
                     let userPostsRef = USER_POSTS_REF.child(currentUid)
                     userPostsRef.updateChildValues([postKey: 1])
+                    
+                    // Update user-feed structure
+                    self.updateUserFeeds(with: postId.key!)
                 
                     // Return to home feed
                     self.dismiss(animated: true, completion: {
