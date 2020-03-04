@@ -53,7 +53,7 @@ class User {
         // uploadFollowNotificationToServer()
         
         // Add followed users posts to current user-feed
-        USER_POSTS_REF.child(uid).observe(.childAdded) { (snapshot) in
+        USER_POSTS_REF.child(self.uid).observe(.childAdded) { (snapshot) in
             let postId = snapshot.key
             USER_FEED_REF.child(currentUid).updateChildValues([postId: 1])
         }
@@ -74,7 +74,8 @@ class User {
         // Remove current user from followed user-follower structure
         USER_FOLLOWER_REF.child(uid).child(currentUid).removeValue()
         
-        USER_POSTS_REF.child(uid).observe(.childAdded) { (snapshot) in
+        // Remove unfollowed users posts from current user-feed
+        USER_POSTS_REF.child(self.uid).observe(.childAdded) { (snapshot) in
             let postId = snapshot.key
             USER_FEED_REF.child(currentUid).child(postId).removeValue()
         }
