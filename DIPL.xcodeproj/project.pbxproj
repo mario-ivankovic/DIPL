@@ -19,8 +19,8 @@
 		AC224A4823E58D1100F9F436 /* UploadPostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC224A4723E58D1100F9F436 /* UploadPostVC.swift */; };
 		AC224A4A23E58D3100F9F436 /* NotificationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC224A4923E58D3100F9F436 /* NotificationVC.swift */; };
 		AC224A4C23E58D5500F9F436 /* UserProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC224A4B23E58D5500F9F436 /* UserProfileVC.swift */; };
-		AC27B71F23F2D18500D31B35 /* FollowVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC27B71E23F2D18500D31B35 /* FollowVC.swift */; };
-		AC27B72123F2D21B00D31B35 /* FollowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC27B72023F2D21B00D31B35 /* FollowCell.swift */; };
+		AC27B71F23F2D18500D31B35 /* FollowLikeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC27B71E23F2D18500D31B35 /* FollowLikeVC.swift */; };
+		AC27B72123F2D21B00D31B35 /* FollowLikeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC27B72023F2D21B00D31B35 /* FollowLikeCell.swift */; };
 		AC5A5E4F23E028B7008F258E /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A5E4E23E028B7008F258E /* LoginVC.swift */; };
 		AC5A5E5223E02BB1008F258E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A5E5123E02BB1008F258E /* Extensions.swift */; };
 		AC5A5E5423E18267008F258E /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A5E5323E18267008F258E /* SignUpVC.swift */; };
@@ -55,8 +55,8 @@
 		AC224A4723E58D1100F9F436 /* UploadPostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPostVC.swift; sourceTree = "<group>"; };
 		AC224A4923E58D3100F9F436 /* NotificationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationVC.swift; sourceTree = "<group>"; };
 		AC224A4B23E58D5500F9F436 /* UserProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileVC.swift; sourceTree = "<group>"; };
-		AC27B71E23F2D18500D31B35 /* FollowVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowVC.swift; sourceTree = "<group>"; };
-		AC27B72023F2D21B00D31B35 /* FollowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowCell.swift; sourceTree = "<group>"; };
+		AC27B71E23F2D18500D31B35 /* FollowLikeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowLikeVC.swift; sourceTree = "<group>"; };
+		AC27B72023F2D21B00D31B35 /* FollowLikeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowLikeCell.swift; sourceTree = "<group>"; };
 		AC5A5E4E23E028B7008F258E /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		AC5A5E5123E02BB1008F258E /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		AC5A5E5323E18267008F258E /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
@@ -159,7 +159,7 @@
 			children = (
 				ACA2EE4323EAE2AF00D121E4 /* UserProfileHeader.swift */,
 				ACF7F45123EDD97D006A692E /* SearchUserCell.swift */,
-				AC27B72023F2D21B00D31B35 /* FollowCell.swift */,
+				AC27B72023F2D21B00D31B35 /* FollowLikeCell.swift */,
 				AC6561BC23F730DA008CF443 /* SelectPhotoCell.swift */,
 				AC6561BE23F7313F008CF443 /* SelectPhotoHeader.swift */,
 				AC844F1F23FA8347007CE733 /* UserPostCell.swift */,
@@ -193,7 +193,7 @@
 			children = (
 				AC224A4B23E58D5500F9F436 /* UserProfileVC.swift */,
 				ACAFCEC023F1FC2800DAC757 /* EditProfileController.swift */,
-				AC27B71E23F2D18500D31B35 /* FollowVC.swift */,
+				AC27B71E23F2D18500D31B35 /* FollowLikeVC.swift */,
 			);
 			path = UserProfile;
 			sourceTree = "<group>";
@@ -375,11 +375,11 @@
 				ACF7F45023EC2511006A692E /* User.swift in Sources */,
 				AC6561BB23F73022008CF443 /* SelectImageVC.swift in Sources */,
 				AC6561BF23F7313F008CF443 /* SelectPhotoHeader.swift in Sources */,
-				AC27B71F23F2D18500D31B35 /* FollowVC.swift in Sources */,
+				AC27B71F23F2D18500D31B35 /* FollowLikeVC.swift in Sources */,
 				AC224A4223E583FD00F9F436 /* MainTabVC.swift in Sources */,
 				AC15715323DED3DF003FFC57 /* AppDelegate.swift in Sources */,
 				AC1B2323240908A700E73FC2 /* FeedCell.swift in Sources */,
-				AC27B72123F2D21B00D31B35 /* FollowCell.swift in Sources */,
+				AC27B72123F2D21B00D31B35 /* FollowLikeCell.swift in Sources */,
 				AC6561BD23F730DA008CF443 /* SelectPhotoCell.swift in Sources */,
 				AC224A4623E58CD500F9F436 /* SearchVC.swift in Sources */,
 			);
