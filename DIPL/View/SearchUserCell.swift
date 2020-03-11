@@ -10,7 +10,7 @@ import UIKit
 
 class SearchUserCell: UITableViewCell {
     
-    // MARK - Properties
+    // MARK: - Properties
     
     var user: User? {
         
