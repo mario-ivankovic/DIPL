@@ -161,6 +161,7 @@ class CommentVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
                 let comment = Comment(user: user, dictionary: dictionary)
                 self.comments.append(comment)
                 self.collectionView?.reloadData()
+                
             })
         }
     }
