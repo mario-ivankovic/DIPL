@@ -38,6 +38,7 @@
 		ACAFCEC123F1FC2800DAC757 /* EditProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAFCEC023F1FC2800DAC757 /* EditProfileController.swift */; };
 		ACCF43D623E32E7900678A31 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ACCF43D523E32E7900678A31 /* GoogleService-Info.plist */; };
 		ACD8699F2420FBEA0029DABE /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD8699E2420FBEA0029DABE /* Comment.swift */; };
+		ACD869A124224C5F0029DABE /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD869A024224C5F0029DABE /* NotificationCell.swift */; };
 		ACF7F45023EC2511006A692E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF7F44F23EC2511006A692E /* User.swift */; };
 		ACF7F45223EDD97D006A692E /* SearchUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF7F45123EDD97D006A692E /* SearchUserCell.swift */; };
 /* End PBXBuildFile section */
@@ -77,6 +78,7 @@
 		ACAFCEC023F1FC2800DAC757 /* EditProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileController.swift; sourceTree = "<group>"; };
 		ACCF43D523E32E7900678A31 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ACD8699E2420FBEA0029DABE /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		ACD869A024224C5F0029DABE /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		ACF7F44F23EC2511006A692E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		ACF7F45123EDD97D006A692E /* SearchUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserCell.swift; sourceTree = "<group>"; };
 		FF816FAAD8FAEE1B895F8DDC /* Pods-DIPL.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DIPL.debug.xcconfig"; path = "Target Support Files/Pods-DIPL/Pods-DIPL.debug.xcconfig"; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 				AC844F1F23FA8347007CE733 /* UserPostCell.swift */,
 				AC1B2322240908A700E73FC2 /* FeedCell.swift */,
 				AC1B2328241AA00000E73FC2 /* CommentCell.swift */,
+				ACD869A024224C5F0029DABE /* NotificationCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 				ACF7F45023EC2511006A692E /* User.swift in Sources */,
 				AC6561BB23F73022008CF443 /* SelectImageVC.swift in Sources */,
 				AC6561BF23F7313F008CF443 /* SelectPhotoHeader.swift in Sources */,
+				ACD869A124224C5F0029DABE /* NotificationCell.swift in Sources */,
 				AC27B71F23F2D18500D31B35 /* FollowLikeVC.swift in Sources */,
 				AC224A4223E583FD00F9F436 /* MainTabVC.swift in Sources */,
 				AC15715323DED3DF003FFC57 /* AppDelegate.swift in Sources */,
