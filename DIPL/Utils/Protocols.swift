@@ -33,3 +33,8 @@ protocol FeedCellDelegate {
     func handleShowLikes(for cell: FeedCell)
     
 }
+
+protocol Printable {
+    
+    var description: String { get }
+}

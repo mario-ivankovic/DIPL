@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		499685DB5D31D8C9294F07D8 /* Pods_DIPL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 505850A3B65AD7C3C6BE6DD5 /* Pods_DIPL.framework */; };
+		AC0FBFEF24296496002E803B /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0FBFEE24296496002E803B /* Notification.swift */; };
 		AC15715323DED3DF003FFC57 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC15715223DED3DF003FFC57 /* AppDelegate.swift */; };
 		AC15715A23DED3DF003FFC57 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC15715823DED3DF003FFC57 /* Main.storyboard */; };
 		AC15715F23DED3E0003FFC57 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC15715D23DED3E0003FFC57 /* LaunchScreen.storyboard */; };
@@ -46,6 +47,7 @@
 /* Begin PBXFileReference section */
 		2FCABE42717773AB607A2266 /* Pods-DIPL.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DIPL.release.xcconfig"; path = "Target Support Files/Pods-DIPL/Pods-DIPL.release.xcconfig"; sourceTree = "<group>"; };
 		505850A3B65AD7C3C6BE6DD5 /* Pods_DIPL.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DIPL.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC0FBFEE24296496002E803B /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		AC15714F23DED3DF003FFC57 /* DIPL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DIPL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC15715223DED3DF003FFC57 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC15715923DED3DF003FFC57 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				ACF7F44F23EC2511006A692E /* User.swift */,
 				AC844F1D23F9FDC0007CE733 /* Post.swift */,
 				ACD8699E2420FBEA0029DABE /* Comment.swift */,
+				AC0FBFEE24296496002E803B /* Notification.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 				AC224A4223E583FD00F9F436 /* MainTabVC.swift in Sources */,
 				AC15715323DED3DF003FFC57 /* AppDelegate.swift in Sources */,
 				AC1B2323240908A700E73FC2 /* FeedCell.swift in Sources */,
+				AC0FBFEF24296496002E803B /* Notification.swift in Sources */,
 				AC27B72123F2D21B00D31B35 /* FollowLikeCell.swift in Sources */,
 				AC6561BD23F730DA008CF443 /* SelectPhotoCell.swift in Sources */,
 				AC224A4623E58CD500F9F436 /* SearchVC.swift in Sources */,
