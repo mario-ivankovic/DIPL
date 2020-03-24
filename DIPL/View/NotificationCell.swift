@@ -12,6 +12,8 @@ class NotificationCell: UITableViewCell {
     
     // MARK: - Properties
     
+    var delegate: NotificationCellDelegate?
+    
     var notification: Notification? {
         
         didSet {
@@ -57,18 +59,28 @@ class NotificationCell: UITableViewCell {
         return button
     }()
     
-    let postImageView: CustomImageView = {
+    lazy var postImageView: CustomImageView = {
         let iv = CustomImageView()
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         iv.backgroundColor = .lightGray
+        
+        let postTap = UITapGestureRecognizer(target: self, action: #selector(handlePostTapped))
+        postTap.numberOfTapsRequired = 1
+        iv.isUserInteractionEnabled = true
+        iv.addGestureRecognizer(postTap)
+        
         return iv
     }()
     
     // MARK: - Handlers
     
     @objc func handleFollowTapped() {
-        
+        delegate?.handleFollowTapped(for: self)
+    }
+    
+    @objc func handlePostTapped() {
+        delegate?.handlePostTapped(for: self)
     }
     
     func configureNotificationLabel() {
@@ -108,7 +120,29 @@ class NotificationCell: UITableViewCell {
             followButton.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
             followButton.layer.cornerRadius = 3
             anchor = followButton.leftAnchor
-
+            
+            // Check and see if we are following that user
+            user.checkIfUserIsFollowed(completion:  { (followed) in
+                
+                if followed {
+                    
+                    // Configure follow button for followed user
+                    self.followButton.setTitle("Following", for: .normal)
+                    self.followButton.setTitleColor(.black, for: .normal)
+                    self.followButton.layer.borderWidth = 0.5
+                    self.followButton.layer.borderColor = UIColor.lightGray.cgColor
+                    self.followButton.backgroundColor = .white
+                    
+                } else {
+                    
+                    // Configure follow button for non followed user
+                    self.followButton.setTitle("Follow", for: .normal)
+                    self.followButton.setTitleColor(.white, for: .normal)
+                    self.followButton.layer.borderWidth = 0
+                    self.followButton.backgroundColor = UIColor(red: 17/255, green: 154/255, blue: 237/255, alpha: 1)
+                    
+                }
+            })
         }
         
         addSubview(notificationLabel)
@@ -119,6 +153,9 @@ class NotificationCell: UITableViewCell {
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        // Disabling selection style
+        selectionStyle = .none
         
         addSubview(profileImageView)
         profileImageView.anchor(top: nil, left: leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 8, paddingBottom: 0, paddingRight: 0, width: 40, height: 40)
