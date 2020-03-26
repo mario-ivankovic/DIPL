@@ -120,6 +120,7 @@ class NotificationVC: UITableViewController, NotificationCellDelegate {
         
         NOTIFICATIONS_REF.child(currentUid).observe(.childAdded) { (snapshot) in
             
+            let notificationId = snapshot.key
             guard let dictionary = snapshot.value as? Dictionary<String, AnyObject> else { return }
             guard let uid = dictionary["uid"] as? String else { return }
             
@@ -142,6 +143,7 @@ class NotificationVC: UITableViewController, NotificationCellDelegate {
                     self.handleReloadTable()
                 }
             })
+            NOTIFICATIONS_REF.child(currentUid).child(notificationId).child("checked").setValue(1)
         }
     }
     

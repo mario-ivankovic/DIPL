@@ -102,16 +102,13 @@ class NotificationCell: UITableViewCell {
         
         guard let notification = self.notification else { return }
         guard let user = notification.user else { return }
-        
-        var anchor: NSLayoutXAxisAnchor!
-        
+                
         if notification.notificationType != .Follow {
             
             // Notificatoin type is comment or like
             addSubview(postImageView)
             postImageView.anchor(top: nil, left: nil, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 8, width: 40, height: 40)
             postImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-            anchor = postImageView.leftAnchor
             
         } else {
 
@@ -120,7 +117,6 @@ class NotificationCell: UITableViewCell {
             followButton.anchor(top: nil, left: nil, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 12, width: 90, height: 30)
             followButton.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
             followButton.layer.cornerRadius = 3
-            anchor = followButton.leftAnchor
             
             // Check and see if we are following that user
             user.checkIfUserIsFollowed(completion:  { (followed) in
@@ -147,7 +143,7 @@ class NotificationCell: UITableViewCell {
         }
         
         addSubview(notificationLabel)
-        notificationLabel.anchor(top: nil, left: profileImageView.rightAnchor, bottom: nil, right: anchor, paddingTop: 0, paddingLeft: 8, paddingBottom: 0, paddingRight: 8, width: 0, height: 0)
+        notificationLabel.anchor(top: nil, left: profileImageView.rightAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 8, paddingBottom: 0, paddingRight: 8, width: 0, height: 0)
         notificationLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         
     }
