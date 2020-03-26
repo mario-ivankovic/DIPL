@@ -15,6 +15,8 @@ class NotificationVC: UITableViewController, NotificationCellDelegate {
     
     // MARK: - Properties
     
+    var timer: Timer?
+    
     var notifications = [Notification]()
 
     override func viewDidLoad() {
@@ -68,24 +70,16 @@ class NotificationVC: UITableViewController, NotificationCellDelegate {
         
         if user.isFollowed {
             
+            // Handle unfollow user
             user.unfollow()
-            
-            // Configure follow button for non followed user
-            cell.followButton.setTitle("Follow", for: .normal)
-            cell.followButton.setTitleColor(.white, for: .normal)
-            cell.followButton.layer.borderWidth = 0
-            cell.followButton.backgroundColor = UIColor(red: 17/255, green: 154/255, blue: 237/255, alpha: 1)
+            cell.followButton.configure(didFollow: false)
             
         } else {
             
+            // Handle follow user
             user.follow()
+            cell.followButton.configure(didFollow: true)
             
-            // Configure follow button for followed user
-            cell.followButton.setTitle("Following", for: .normal)
-            cell.followButton.setTitleColor(.black, for: .normal)
-            cell.followButton.layer.borderWidth = 0.5
-            cell.followButton.layer.borderColor = UIColor.lightGray.cgColor
-            cell.followButton.backgroundColor = .white
         }
     }
     
@@ -97,6 +91,25 @@ class NotificationVC: UITableViewController, NotificationCellDelegate {
         feedController.viewSinglePost = true
         feedController.post = post
         navigationController?.pushViewController(feedController, animated: true)
+        
+    }
+    
+    // MARK: - Handlers
+    
+    // Gets triggered in certain time intervals to reload our table view data and be populated with information
+    func handleReloadTable() {
+        self.timer?.invalidate()
+        
+        self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(handleSortNotifications), userInfo: nil, repeats: false)
+    }
+    
+    @objc func handleSortNotifications() {
+        
+        self.notifications.sort { (notification1, notification2) -> Bool in
+            return notification1.creationDate > notification2.creationDate
+        }
+        
+        self.tableView.reloadData()
     }
     
     // MARK: - API
@@ -119,14 +132,14 @@ class NotificationVC: UITableViewController, NotificationCellDelegate {
                         
                         let notification = Notification(user: user, post: post, dictionary: dictionary)
                         self.notifications.append(notification)
-                        self.tableView.reloadData()
+                        self.handleReloadTable()
                     })
                     
                 } else {
                     
                     let notification = Notification(user: user, dictionary: dictionary)
                     self.notifications.append(notification)
-                    self.tableView.reloadData()
+                    self.handleReloadTable()
                 }
             })
         }

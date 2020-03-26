@@ -9,6 +9,30 @@
 import UIKit
 import Firebase
 
+extension UIButton {
+    
+    func configure(didFollow: Bool) {
+        
+        if didFollow {
+            
+            // Handle follow user
+            self.setTitle("Following", for: .normal)
+            self.setTitleColor(.black, for: .normal)
+            self.layer.borderWidth = 0.5
+            self.layer.borderColor = UIColor.lightGray.cgColor
+            self.backgroundColor = .white
+            
+        } else {
+            
+            // Handle unfollow user
+            self.setTitle("Follow", for: .normal)
+            self.setTitleColor(.white, for: .normal)
+            self.layer.borderWidth = 0
+            self.backgroundColor = UIColor(red: 17/255, green: 154/255, blue: 237/255, alpha: 1)
+        }
+    }
+}
+
 extension UIView {
     
     // Function that every time we call it's going to allow us to place our view components wherever we would like to on the screen

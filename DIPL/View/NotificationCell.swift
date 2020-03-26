@@ -89,10 +89,11 @@ class NotificationCell: UITableViewCell {
         guard let user = notification.user else { return }
         guard let username = user.username else { return }
         let notificationMessage = notification.notificationType.description
+        guard let notificationDate = getNotificationTimeStamp() else { return }
         
         let attributedText = NSMutableAttributedString(string: username, attributes: [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 12)])
         attributedText.append(NSAttributedString(string: notificationMessage, attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 12)]))
-        attributedText.append(NSAttributedString(string: " 2d", attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 12), NSAttributedStringKey.foregroundColor: UIColor.lightGray]))
+        attributedText.append(NSAttributedString(string: " \(notificationDate)", attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 12), NSAttributedStringKey.foregroundColor: UIColor.lightGray]))
         notificationLabel.attributedText = attributedText
         
     }
@@ -150,7 +151,22 @@ class NotificationCell: UITableViewCell {
         notificationLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         
     }
+    
+    func getNotificationTimeStamp() -> String? {
+        
+        guard let notification = self.notification else { return nil }
+        
+        let dateFormatter = DateComponentsFormatter()
+        dateFormatter.allowedUnits = [.second, .minute, .hour, .day, .weekOfMonth]
+        dateFormatter.maximumUnitCount = 1
+        dateFormatter.unitsStyle = .abbreviated
+        let now = Date()
+        return dateFormatter.string(from: notification.creationDate, to: now)
+        
+    }
 
+    // MARK: - Init
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
