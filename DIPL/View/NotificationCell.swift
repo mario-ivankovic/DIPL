@@ -105,10 +105,12 @@ class NotificationCell: UITableViewCell {
                 
         if notification.notificationType != .Follow {
             
-            // Notificatoin type is comment or like
+            // Notification type is comment or like
             addSubview(postImageView)
             postImageView.anchor(top: nil, left: nil, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 8, width: 40, height: 40)
             postImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+            followButton.isHidden = true
+            postImageView.isHidden = false
             
         } else {
 
@@ -117,6 +119,8 @@ class NotificationCell: UITableViewCell {
             followButton.anchor(top: nil, left: nil, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 12, width: 90, height: 30)
             followButton.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
             followButton.layer.cornerRadius = 3
+            followButton.isHidden = false
+            postImageView.isHidden = true
             
             // Check and see if we are following that user
             user.checkIfUserIsFollowed(completion:  { (followed) in

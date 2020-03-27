@@ -16,7 +16,6 @@ class NotificationVC: UITableViewController, NotificationCellDelegate {
     // MARK: - Properties
     
     var timer: Timer?
-    
     var notifications = [Notification]()
 
     override func viewDidLoad() {
@@ -96,13 +95,6 @@ class NotificationVC: UITableViewController, NotificationCellDelegate {
     
     // MARK: - Handlers
     
-    // Gets triggered in certain time intervals to reload our table view data and be populated with information
-    func handleReloadTable() {
-        self.timer?.invalidate()
-        
-        self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(handleSortNotifications), userInfo: nil, repeats: false)
-    }
-    
     @objc func handleSortNotifications() {
         
         self.notifications.sort { (notification1, notification2) -> Bool in
@@ -110,6 +102,13 @@ class NotificationVC: UITableViewController, NotificationCellDelegate {
         }
         
         self.tableView.reloadData()
+    }
+    
+    // Gets triggered in certain time intervals to reload our table view data and be populated with information
+    func handleReloadTable() {
+        self.timer?.invalidate()
+        
+        self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(handleSortNotifications), userInfo: nil, repeats: false)
     }
     
     // MARK: - API
