@@ -45,6 +45,9 @@
 		ACE6825724309E52008DB6FD /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE6825624309E52008DB6FD /* MessageCell.swift */; };
 		ACE682592430C726008DB6FD /* NewMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE682582430C726008DB6FD /* NewMessageController.swift */; };
 		ACE6825B2430C7B1008DB6FD /* NewMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE6825A2430C7B1008DB6FD /* NewMessageCell.swift */; };
+		ACE6825D2430FB75008DB6FD /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE6825C2430FB75008DB6FD /* Message.swift */; };
+		ACE6825F2430FCFE008DB6FD /* ChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE6825E2430FCFE008DB6FD /* ChatController.swift */; };
+		ACE682612431087D008DB6FD /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE682602431087D008DB6FD /* ChatCell.swift */; };
 		ACF7F45023EC2511006A692E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF7F44F23EC2511006A692E /* User.swift */; };
 		ACF7F45223EDD97D006A692E /* SearchUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF7F45123EDD97D006A692E /* SearchUserCell.swift */; };
 /* End PBXBuildFile section */
@@ -91,6 +94,9 @@
 		ACE6825624309E52008DB6FD /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		ACE682582430C726008DB6FD /* NewMessageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageController.swift; sourceTree = "<group>"; };
 		ACE6825A2430C7B1008DB6FD /* NewMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageCell.swift; sourceTree = "<group>"; };
+		ACE6825C2430FB75008DB6FD /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		ACE6825E2430FCFE008DB6FD /* ChatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatController.swift; sourceTree = "<group>"; };
+		ACE682602431087D008DB6FD /* ChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
 		ACF7F44F23EC2511006A692E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		ACF7F45123EDD97D006A692E /* SearchUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserCell.swift; sourceTree = "<group>"; };
 		FF816FAAD8FAEE1B895F8DDC /* Pods-DIPL.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DIPL.debug.xcconfig"; path = "Target Support Files/Pods-DIPL/Pods-DIPL.debug.xcconfig"; sourceTree = "<group>"; };
@@ -200,6 +206,7 @@
 				AC844F1D23F9FDC0007CE733 /* Post.swift */,
 				ACD8699E2420FBEA0029DABE /* Comment.swift */,
 				AC0FBFEE24296496002E803B /* Notification.swift */,
+				ACE6825C2430FB75008DB6FD /* Message.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -273,6 +280,7 @@
 			children = (
 				ACE6825324309BFB008DB6FD /* MessagesController.swift */,
 				ACE682582430C726008DB6FD /* NewMessageController.swift */,
+				ACE6825E2430FCFE008DB6FD /* ChatController.swift */,
 			);
 			path = Messages;
 			sourceTree = "<group>";
@@ -282,6 +290,7 @@
 			children = (
 				ACE6825624309E52008DB6FD /* MessageCell.swift */,
 				ACE6825A2430C7B1008DB6FD /* NewMessageCell.swift */,
+				ACE682602431087D008DB6FD /* ChatCell.swift */,
 			);
 			path = Messages;
 			sourceTree = "<group>";
@@ -404,7 +413,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				ACA2EE4423EAE2AF00D121E4 /* UserProfileHeader.swift in Sources */,
+				ACE6825F2430FCFE008DB6FD /* ChatController.swift in Sources */,
 				AC844F2223FAAA42007CE733 /* CustomImageView.swift in Sources */,
+				ACE682612431087D008DB6FD /* ChatCell.swift in Sources */,
 				AC844F1E23F9FDC0007CE733 /* Post.swift in Sources */,
 				ACD8699F2420FBEA0029DABE /* Comment.swift in Sources */,
 				ACAFCEC123F1FC2800DAC757 /* EditProfileController.swift in Sources */,
@@ -424,6 +435,7 @@
 				AC62D02B23F0BE5B0042A0EA /* Protocols.swift in Sources */,
 				AC844F2023FA8347007CE733 /* UserPostCell.swift in Sources */,
 				ACF7F45023EC2511006A692E /* User.swift in Sources */,
+				ACE6825D2430FB75008DB6FD /* Message.swift in Sources */,
 				AC6561BB23F73022008CF443 /* SelectImageVC.swift in Sources */,
 				AC6561BF23F7313F008CF443 /* SelectPhotoHeader.swift in Sources */,
 				ACE68251242FDEE7008DB6FD /* SearchPostCell.swift in Sources */,
