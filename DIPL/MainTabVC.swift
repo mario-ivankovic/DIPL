@@ -14,7 +14,7 @@ class MainTabVC: UITabBarController, UITabBarControllerDelegate {
     // MARK: - Properties
     
     let dot = UIView()
-    var notificatoinIDs = [String]()
+    var notificationIDs = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -149,7 +149,7 @@ class MainTabVC: UITabBarController, UITabBarControllerDelegate {
     func observeNotifications() {
         
         guard let currentUid = Auth.auth().currentUser?.uid else { return }
-        self.notificatoinIDs.removeAll()
+        self.notificationIDs.removeAll()
         
         NOTIFICATIONS_REF.child(currentUid).observeSingleEvent(of: .value) { (snapshot) in
                 

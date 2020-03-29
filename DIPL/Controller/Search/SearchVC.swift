@@ -210,15 +210,13 @@ class SearchVC: UITableViewController, UISearchBarDelegate, UICollectionViewDele
         // Unhide cancel button
         searchBar.showsCancelButton = false
         
-        inSearchMode = false
-        
         searchBar.text = nil
-        
+
+        inSearchMode = false
         collectionViewEnabled = true
         collectionView.isHidden = false
         
         tableView.separatorColor = .clear
-        
         tableView.reloadData()
     }
     

@@ -1,5 +1,5 @@
 //
-//  MessagesCell.swift
+//  NewMessageCell.swift
 //  DIPL
 //
 //  Created by Mario Ivankovic on 29/03/2020.
@@ -8,9 +8,22 @@
 
 import UIKit
 
-class MessageCell: UITableViewCell {
-    
+class NewMessageCell: UITableViewCell {
+
     // MARK: - Properties
+    
+    var user: User? {
+        
+        didSet {
+            guard let profileImageUrl = user?.profileImageUrl else { return }
+            guard let username = user?.username else { return }
+            guard let fullname = user?.name else { return }
+            
+            profileImageView.loadImage(with: profileImageUrl)
+            textLabel?.text = username
+            detailTextLabel?.text = fullname
+        }
+    }
     
     let profileImageView: CustomImageView = {
         let iv = CustomImageView()
@@ -20,31 +33,18 @@ class MessageCell: UITableViewCell {
         return iv
     }()
     
-    let timeStampLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 12)
-        label.textColor = .darkGray
-        label.text = "2h"
-        return label
-    }()
-    
     // MARK: - Init
-
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
-        
-        selectionStyle = .none
         
         addSubview(profileImageView)
         profileImageView.anchor(top: nil, left: leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 12, paddingBottom: 0, paddingRight: 0, width: 50, height: 50)
         profileImageView.layer.cornerRadius = 50 / 2
         profileImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         
-        addSubview(timeStampLabel)
-        timeStampLabel.anchor(top: topAnchor, left: nil, bottom: nil, right: rightAnchor, paddingTop: 20, paddingLeft: 0, paddingBottom: 0, paddingRight: 12, width: 0, height: 0)
-        
         textLabel?.text = "Vodopad"
-        detailTextLabel?.text = "Some text to see if it works"
+        detailTextLabel?.text = "Vodopad2"
         
     }
     
