@@ -184,17 +184,8 @@
 		AC15716723DED41C003FFC57 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				ACE68262243278D0008DB6FD /* Social */,
 				ACE6825524309E24008DB6FD /* Messages */,
-				ACA2EE4323EAE2AF00D121E4 /* UserProfileHeader.swift */,
-				ACF7F45123EDD97D006A692E /* SearchUserCell.swift */,
-				AC27B72023F2D21B00D31B35 /* FollowLikeCell.swift */,
-				AC6561BC23F730DA008CF443 /* SelectPhotoCell.swift */,
-				AC6561BE23F7313F008CF443 /* SelectPhotoHeader.swift */,
-				AC844F1F23FA8347007CE733 /* UserPostCell.swift */,
-				AC1B2322240908A700E73FC2 /* FeedCell.swift */,
-				AC1B2328241AA00000E73FC2 /* CommentCell.swift */,
-				ACD869A024224C5F0029DABE /* NotificationCell.swift */,
-				ACE68250242FDEE7008DB6FD /* SearchPostCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -293,6 +284,23 @@
 				ACE682602431087D008DB6FD /* ChatCell.swift */,
 			);
 			path = Messages;
+			sourceTree = "<group>";
+		};
+		ACE68262243278D0008DB6FD /* Social */ = {
+			isa = PBXGroup;
+			children = (
+				ACA2EE4323EAE2AF00D121E4 /* UserProfileHeader.swift */,
+				ACF7F45123EDD97D006A692E /* SearchUserCell.swift */,
+				AC27B72023F2D21B00D31B35 /* FollowLikeCell.swift */,
+				AC6561BC23F730DA008CF443 /* SelectPhotoCell.swift */,
+				AC6561BE23F7313F008CF443 /* SelectPhotoHeader.swift */,
+				AC844F1F23FA8347007CE733 /* UserPostCell.swift */,
+				AC1B2322240908A700E73FC2 /* FeedCell.swift */,
+				AC1B2328241AA00000E73FC2 /* CommentCell.swift */,
+				ACD869A024224C5F0029DABE /* NotificationCell.swift */,
+				ACE68250242FDEE7008DB6FD /* SearchPostCell.swift */,
+			);
+			path = Social;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
