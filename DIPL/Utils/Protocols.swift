@@ -41,6 +41,10 @@ protocol NotificationCellDelegate {
     
 }
 
+protocol MessageCellDelegate {
+    func configureUserData(for cell: MessageCell)
+}
+
 protocol Printable {
     
     var description: String { get }

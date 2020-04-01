@@ -44,7 +44,7 @@ class NewMessageCell: UITableViewCell {
         profileImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         
         textLabel?.text = "Vodopad"
-        detailTextLabel?.text = "Vodopad2"
+        detailTextLabel?.text = "Vodopad"
         
     }
     
