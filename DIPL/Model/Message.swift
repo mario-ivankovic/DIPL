@@ -22,7 +22,7 @@ class Message {
             self.messageText = messageText
         }
         
-        if let fromId = dictionary["fromid"] as? String {
+        if let fromId = dictionary["fromId"] as? String {
             self.fromId = fromId
         }
         
@@ -39,11 +39,10 @@ class Message {
         
         guard let currentUid = Auth.auth().currentUser?.uid else { return "" }
         
-        if fromId != currentUid {
+        if fromId == currentUid {
             return toId
         } else {
             return fromId
         }
-        
     }
 }

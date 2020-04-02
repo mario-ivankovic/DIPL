@@ -110,6 +110,10 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ChatCell
+        
+        cell.message = messages[indexPath.item]
+        
+        configureMessage(cell: cell, message: messages[indexPath.item])
                 
         return cell
     }
@@ -123,13 +127,46 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     @objc func handleInfoTapped() {
-        print("Handle info tapped")
+        let userProfileController = UserProfileVC(collectionViewLayout: UICollectionViewFlowLayout())
+        userProfileController.user = user
+        navigationController?.pushViewController(userProfileController, animated: true)
     }
     
     func estimateFrameForText(_ text: String) -> CGRect {
+        
         let size = CGSize(width: 200, height: 1000)
         let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
         return NSString(string: text).boundingRect(with: size, options: options, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16)], context: nil)
+        
+    }
+    
+    func configureMessage(cell: ChatCell, message: Message) {
+        
+        guard let currentUid = Auth.auth().currentUser?.uid else { return }
+        
+        cell.bubbleWidthAnchor?.constant = estimateFrameForText(message.messageText).width + 32
+        cell.frame.size.height = estimateFrameForText(message.messageText).height + 20
+        
+        // Configure attributes on whether or not it's from the user we're chatting with or if it's from user currently logged in
+        if message.fromId == currentUid {
+            
+            // Current user that is logged in
+            cell.bubbleViewRightAnchor?.isActive = true
+            cell.bubbleViewLeftAnchor?.isActive = false
+            cell.bubbleView.backgroundColor = UIColor.rgb(red: 0, green: 137, blue: 249)
+            cell.textView.textColor = .white
+            cell.profileImageView.isHidden = true
+            
+        } else {
+            
+            // User that we're chatting with
+            cell.bubbleViewRightAnchor?.isActive = false
+            cell.bubbleViewLeftAnchor?.isActive = true
+            cell.bubbleView.backgroundColor = UIColor.rgb(red: 240, green: 240, blue: 240)
+            cell.textView.textColor = .black
+            cell.profileImageView.isHidden = false
+            
+        }
     }
     
     func configureNavigationBar() {
@@ -155,6 +192,7 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
         guard let currentUid = Auth.auth().currentUser?.uid else { return }
         guard let user = self.user else { return }
         guard let uid = user.uid else { return }
+        
         let creationDate = Int(NSDate().timeIntervalSince1970)
         
         let messageValues = ["creationDate": creationDate,

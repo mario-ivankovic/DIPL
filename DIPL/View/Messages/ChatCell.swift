@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class ChatCell: UICollectionViewCell {
     
@@ -15,6 +16,21 @@ class ChatCell: UICollectionViewCell {
     var bubbleWidthAnchor: NSLayoutConstraint?
     var bubbleViewRightAnchor: NSLayoutConstraint?
     var bubbleViewLeftAnchor: NSLayoutConstraint?
+    
+    var message: Message? {
+        
+        didSet {
+            
+            guard let messageText = message?.messageText else { return }
+            textView.text = messageText
+            
+            guard let chatPartnerId = message?.getChatPartnerId() else { return }
+            Database.fetchUser(with: chatPartnerId) { (user) in
+                guard let profileImageUrl = user.profileImageUrl else { return }
+                self.profileImageView.loadImage(with: profileImageUrl)
+            }
+        }
+    }
 
     
     let bubbleView: UIView = {
