@@ -96,31 +96,6 @@ class UploadPostVC: UIViewController, UITextViewDelegate {
         USER_FEED_REF.child(currentUid).updateChildValues(values)
     }
     
-    func configureViewComponents() {
-        view.backgroundColor = .white
-        
-        // Photo image view
-        view.addSubview(photoImageView)
-        photoImageView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: nil, paddingTop: 92, paddingLeft: 12, paddingBottom: 0, paddingRight: 0, width: 100, height: 100)
-        
-        // Caption text view
-        view.addSubview(captionTextView)
-        captionTextView.anchor(top: view.topAnchor, left: photoImageView.rightAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 92, paddingLeft: 12, paddingBottom: 0, paddingRight: 12, width: 0, height: 100)
-        
-        // Share button
-        view.addSubview(shareButton)
-        shareButton.anchor(top: photoImageView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 12, paddingLeft: 24, paddingBottom: 0, paddingRight: 24, width: 0, height: 40)
-        
-    }
-    
-    func loadImage() {
-        
-        guard let selectedImage = self.selectedImage else { return }
-        
-        photoImageView.image = selectedImage
-        
-    }
-    
     @objc func handleSharePost() {
         
         // Parameters
@@ -169,7 +144,10 @@ class UploadPostVC: UIViewController, UITextViewDelegate {
                     userPostsRef.updateChildValues([postKey: 1])
                     
                     // Update user-feed structure
-                    self.updateUserFeeds(with: postId.key!)
+                    self.updateUserFeeds(with: postKey)
+                    
+                    // Upload hashtag to server
+                    self.uploadHashtagToServer(withPostId: postKey)
                 
                     // Return to home feed
                     self.dismiss(animated: true, completion: {
@@ -177,6 +155,55 @@ class UploadPostVC: UIViewController, UITextViewDelegate {
                     })
                 })
             })
+        }
+    }
+    
+    func configureViewComponents() {
+        view.backgroundColor = .white
+        
+        // Photo image view
+        view.addSubview(photoImageView)
+        photoImageView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: nil, paddingTop: 92, paddingLeft: 12, paddingBottom: 0, paddingRight: 0, width: 100, height: 100)
+        
+        // Caption text view
+        view.addSubview(captionTextView)
+        captionTextView.anchor(top: view.topAnchor, left: photoImageView.rightAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 92, paddingLeft: 12, paddingBottom: 0, paddingRight: 12, width: 0, height: 100)
+        
+        // Share button
+        view.addSubview(shareButton)
+        shareButton.anchor(top: photoImageView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 12, paddingLeft: 24, paddingBottom: 0, paddingRight: 24, width: 0, height: 40)
+        
+    }
+    
+    func loadImage() {
+        
+        guard let selectedImage = self.selectedImage else { return }
+        
+        photoImageView.image = selectedImage
+        
+    }
+    
+    // MARK: - API
+    func uploadHashtagToServer(withPostId postId: String) {
+        
+        guard let caption = captionTextView.text else { return }
+        
+        let words: [String] = caption.components(separatedBy: .whitespacesAndNewlines)
+        
+        for var word in words {
+            
+            if word.hasPrefix("#") {
+                    
+                // Making sure that we are getting only letters in our hashtag
+                word = word.trimmingCharacters(in: .punctuationCharacters)
+                word = word.trimmingCharacters(in: .symbols)
+                
+                let hashtagValues = [postId: 1]
+                
+                // Sending hashtag to database
+                HASHTAG_POST_REF.child(word.lowercased()).updateChildValues(hashtagValues)
+                
+            }
         }
     }
 }

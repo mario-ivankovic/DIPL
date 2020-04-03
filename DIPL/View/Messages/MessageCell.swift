@@ -13,6 +13,8 @@ class MessageCell: UITableViewCell {
     
     // MARK: - Properties
     
+    var delegate: MessageCellDelegate?
+    
     var message: Message? {
         
         didSet {
@@ -61,9 +63,6 @@ class MessageCell: UITableViewCell {
         
         addSubview(timeStampLabel)
         timeStampLabel.anchor(top: topAnchor, left: nil, bottom: nil, right: rightAnchor, paddingTop: 20, paddingLeft: 0, paddingBottom: 0, paddingRight: 12, width: 0, height: 0)
-        
-        textLabel?.text = "Vodopad"
-        detailTextLabel?.text = "Some text to see if it works"
         
     }
     

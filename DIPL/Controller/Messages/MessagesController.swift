@@ -45,6 +45,7 @@ class MessagesController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! MessageCell
         
+        
         cell.message = messages[indexPath.row]
         
         return cell
@@ -99,7 +100,6 @@ class MessagesController: UITableViewController {
             USER_MESSAGES_REF.child(currentUid).child(uid).observe(.childAdded, with: { (snapshot) in
                 
                 let messageId = snapshot.key
-                
                 self.fetchMessage(withMessageId: messageId)
             })
         }
@@ -119,5 +119,4 @@ class MessagesController: UITableViewController {
             self.tableView?.reloadData()
         }
     }
-    
 }
