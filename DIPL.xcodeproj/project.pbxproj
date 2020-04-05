@@ -24,6 +24,8 @@
 		AC224A4C23E58D5500F9F436 /* UserProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC224A4B23E58D5500F9F436 /* UserProfileVC.swift */; };
 		AC27B71F23F2D18500D31B35 /* FollowLikeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC27B71E23F2D18500D31B35 /* FollowLikeVC.swift */; };
 		AC27B72123F2D21B00D31B35 /* FollowLikeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC27B72023F2D21B00D31B35 /* FollowLikeCell.swift */; };
+		AC46D3EC243A2480007CEF67 /* HashtagController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC46D3EB243A2480007CEF67 /* HashtagController.swift */; };
+		AC46D3EE243A269E007CEF67 /* HashtagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC46D3ED243A269E007CEF67 /* HashtagCell.swift */; };
 		AC5A5E4F23E028B7008F258E /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A5E4E23E028B7008F258E /* LoginVC.swift */; };
 		AC5A5E5223E02BB1008F258E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A5E5123E02BB1008F258E /* Extensions.swift */; };
 		AC5A5E5423E18267008F258E /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A5E5323E18267008F258E /* SignUpVC.swift */; };
@@ -73,6 +75,8 @@
 		AC224A4B23E58D5500F9F436 /* UserProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileVC.swift; sourceTree = "<group>"; };
 		AC27B71E23F2D18500D31B35 /* FollowLikeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowLikeVC.swift; sourceTree = "<group>"; };
 		AC27B72023F2D21B00D31B35 /* FollowLikeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowLikeCell.swift; sourceTree = "<group>"; };
+		AC46D3EB243A2480007CEF67 /* HashtagController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashtagController.swift; sourceTree = "<group>"; };
+		AC46D3ED243A269E007CEF67 /* HashtagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashtagCell.swift; sourceTree = "<group>"; };
 		AC5A5E4E23E028B7008F258E /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		AC5A5E5123E02BB1008F258E /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		AC5A5E5323E18267008F258E /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
@@ -245,6 +249,7 @@
 			children = (
 				AC224A4323E58CAB00F9F436 /* FeedVC.swift */,
 				AC1B2326241A9EFD00E73FC2 /* CommentVC.swift */,
+				AC46D3EB243A2480007CEF67 /* HashtagController.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -299,6 +304,7 @@
 				AC1B2328241AA00000E73FC2 /* CommentCell.swift */,
 				ACD869A024224C5F0029DABE /* NotificationCell.swift */,
 				ACE68250242FDEE7008DB6FD /* SearchPostCell.swift */,
+				AC46D3ED243A269E007CEF67 /* HashtagCell.swift */,
 			);
 			path = Social;
 			sourceTree = "<group>";
@@ -447,6 +453,7 @@
 				AC6561BB23F73022008CF443 /* SelectImageVC.swift in Sources */,
 				AC6561BF23F7313F008CF443 /* SelectPhotoHeader.swift in Sources */,
 				ACE68251242FDEE7008DB6FD /* SearchPostCell.swift in Sources */,
+				AC46D3EC243A2480007CEF67 /* HashtagController.swift in Sources */,
 				ACD869A124224C5F0029DABE /* NotificationCell.swift in Sources */,
 				AC27B71F23F2D18500D31B35 /* FollowLikeVC.swift in Sources */,
 				AC224A4223E583FD00F9F436 /* MainTabVC.swift in Sources */,
@@ -455,6 +462,7 @@
 				AC0FBFEF24296496002E803B /* Notification.swift in Sources */,
 				ACE682592430C726008DB6FD /* NewMessageController.swift in Sources */,
 				AC27B72123F2D21B00D31B35 /* FollowLikeCell.swift in Sources */,
+				AC46D3EE243A269E007CEF67 /* HashtagCell.swift in Sources */,
 				ACE6825B2430C7B1008DB6FD /* NewMessageCell.swift in Sources */,
 				AC6561BD23F730DA008CF443 /* SelectPhotoCell.swift in Sources */,
 				AC224A4623E58CD500F9F436 /* SearchVC.swift in Sources */,

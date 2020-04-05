@@ -85,6 +85,8 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
         
         handleHashtagTapped(forCell: cell)
         
+        handleUsernameLabelTapped(forCell: cell)
+        
         return cell
     }
     
@@ -178,9 +180,25 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
     func handleHashtagTapped(forCell cell: FeedCell) {
         
         cell.captionLabel.handleHashtagTap { (hashtag) in
-            print("hashtag is \(hashtag)")
+            let hashtagController = HashtagController(collectionViewLayout: UICollectionViewFlowLayout())
+            hashtagController.hashtag = hashtag
+            self.navigationController?.pushViewController(hashtagController, animated: true)
         }
         
+    }
+    
+    func handleUsernameLabelTapped(forCell cell: FeedCell) {
+        
+        guard let user = cell.post?.user else { return }
+        guard let username = user.username else { return }
+        
+        let customType = ActiveType.custom(pattern: "^\(username)\\b")
+
+        cell.captionLabel.handleCustomTap(for: customType) { (_) in
+            let userProfileController = UserProfileVC(collectionViewLayout: UICollectionViewFlowLayout())
+            userProfileController.user = user
+            self.navigationController?.pushViewController(userProfileController, animated: true)
+        }
     }
     
     func configureNavigationBar() {
