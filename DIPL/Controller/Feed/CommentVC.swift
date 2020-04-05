@@ -124,6 +124,10 @@ class CommentVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CommentCell
         
+        handleHashtagTapped(forCell: cell)
+        
+        handleMentionTapped(forCell: cell)
+        
         cell.comment = comments[indexPath.item]
         
         return cell
@@ -149,6 +153,24 @@ class CommentVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
         }
     }
     
+    func handleHashtagTapped(forCell cell: CommentCell) {
+        
+        cell.commentLabel.handleHashtagTap { (hashtag) in
+            let hashtagController = HashtagController(collectionViewLayout: UICollectionViewFlowLayout())
+            hashtagController.hashtag = hashtag
+            self.navigationController?.pushViewController(hashtagController, animated: true)
+        }
+        
+    }
+    
+    func handleMentionTapped(forCell cell: CommentCell) {
+        cell.commentLabel.handleMentionTap { (username) in
+            self.getMentionedUser(withUsername: username)
+        }
+    }
+    
+    // MARK: - API
+    
     func fetchComments() {
         
         guard let postId = self.post?.postId else { return }
@@ -163,6 +185,26 @@ class CommentVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
                 self.comments.append(comment)
                 self.collectionView?.reloadData()
                 
+            })
+        }
+    }
+    
+    func getMentionedUser(withUsername username: String) {
+        
+        USER_REF.observe(.childAdded) { (snapshot) in
+            let uid = snapshot.key
+            
+            USER_REF.child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                guard let dictionary = snapshot.value as? Dictionary<String, AnyObject> else { return }
+                
+                if username == dictionary["username"] as? String {
+                    Database.fetchUser(with: uid, completion:  { (user) in
+                        let userProfileController = UserProfileVC(collectionViewLayout: UICollectionViewFlowLayout())
+                        userProfileController.user = user
+                        self.navigationController?.pushViewController(userProfileController, animated: true)
+                        return
+                    })
+                }
             })
         }
     }
