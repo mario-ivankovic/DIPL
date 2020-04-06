@@ -149,6 +149,11 @@ class CommentVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
         
         COMMENT_REF.child(postId).childByAutoId().updateChildValues(values) { (err, ref) in
             self.uploadCommentNotificationToServer()
+            
+            if commentText.contains("@") {
+                self.uploadMentionNotification(forPostId: postId, withText: commentText, isForComment: true)
+            }
+            
             self.commentTextField.text = nil
         }
     }
@@ -185,26 +190,6 @@ class CommentVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
                 self.comments.append(comment)
                 self.collectionView?.reloadData()
                 
-            })
-        }
-    }
-    
-    func getMentionedUser(withUsername username: String) {
-        
-        USER_REF.observe(.childAdded) { (snapshot) in
-            let uid = snapshot.key
-            
-            USER_REF.child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
-                guard let dictionary = snapshot.value as? Dictionary<String, AnyObject> else { return }
-                
-                if username == dictionary["username"] as? String {
-                    Database.fetchUser(with: uid, completion:  { (user) in
-                        let userProfileController = UserProfileVC(collectionViewLayout: UICollectionViewFlowLayout())
-                        userProfileController.user = user
-                        self.navigationController?.pushViewController(userProfileController, animated: true)
-                        return
-                    })
-                }
             })
         }
     }

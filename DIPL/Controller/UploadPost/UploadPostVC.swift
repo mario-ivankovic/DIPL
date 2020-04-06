@@ -148,6 +148,11 @@ class UploadPostVC: UIViewController, UITextViewDelegate {
                     
                     // Upload hashtag to server
                     self.uploadHashtagToServer(withPostId: postKey)
+                    
+                    // Upload mention notification to server
+                    if caption.contains("@") {
+                        self.uploadMentionNotification(forPostId: postKey, withText: caption, isForComment: false)
+                    }
                 
                     // Return to home feed
                     self.dismiss(animated: true, completion: {

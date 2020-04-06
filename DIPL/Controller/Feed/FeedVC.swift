@@ -87,6 +87,8 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
         
         handleUsernameLabelTapped(forCell: cell)
         
+        handleMentionTapped(forCell: cell)
+        
         return cell
     }
     
@@ -187,6 +189,14 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
         
     }
     
+    func handleMentionTapped(forCell cell: FeedCell) {
+        
+        cell.captionLabel.handleMentionTap { (username) in
+            self.getMentionedUser(withUsername: username)
+        }
+        
+    }
+    
     func handleUsernameLabelTapped(forCell cell: FeedCell) {
         
         guard let user = cell.post?.user else { return }
@@ -199,6 +209,7 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
             userProfileController.user = user
             self.navigationController?.pushViewController(userProfileController, animated: true)
         }
+        
     }
     
     func configureNavigationBar() {
