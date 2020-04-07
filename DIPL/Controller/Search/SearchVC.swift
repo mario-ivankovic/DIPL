@@ -22,6 +22,8 @@ class SearchVC: UITableViewController, UISearchBarDelegate, UICollectionViewDele
     var collectionView: UICollectionView!
     var collectionViewEnabled = false
     var posts = [Post]()
+    var currentKey: String?
+    var userCurrentKey: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,12 +43,9 @@ class SearchVC: UITableViewController, UISearchBarDelegate, UICollectionViewDele
         // Fetch posts
         fetchPosts()
         
-        // Fetch users
-        fetchUsers()
-        
     }
 
-    // MARK: - Table view data source
+    // MARK: - UITableView
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
@@ -57,11 +56,23 @@ class SearchVC: UITableViewController, UISearchBarDelegate, UICollectionViewDele
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         if inSearchMode {
             return filteredUsers.count
         } else {
             return users.count
         }
+        
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        if users.count > 3 {
+            if indexPath.item == users.count - 1 {
+                fetchUsers()
+            }
+        }
+        
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -135,8 +146,19 @@ class SearchVC: UITableViewController, UISearchBarDelegate, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
         let width = (view.frame.width - 2) / 3
         return CGSize(width: width, height: width)
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
+        if posts.count > 14 {
+            if indexPath.item == posts.count - 1 {
+                fetchPosts()
+            }
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -144,11 +166,13 @@ class SearchVC: UITableViewController, UISearchBarDelegate, UICollectionViewDele
        }
        
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SearchPostCell", for: indexPath) as! SearchPostCell
         
         cell.post = posts[indexPath.item]
         
         return cell
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -172,18 +196,23 @@ class SearchVC: UITableViewController, UISearchBarDelegate, UICollectionViewDele
         navigationItem.titleView = searchBar
         searchBar.barTintColor = UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1)
         searchBar.tintColor = .black
+        
     }
     
     // MARK: - UISearchBar
     
     // Called every time we click into search bar
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        
         searchBar.showsCancelButton = true
+        
+        fetchUsers()
         
         collectionView.isHidden = true
         collectionViewEnabled = false
         
         tableView.separatorColor = .lightGray
+        
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -218,37 +247,95 @@ class SearchVC: UITableViewController, UISearchBarDelegate, UICollectionViewDele
         
         tableView.separatorColor = .clear
         tableView.reloadData()
+        
     }
     
     // MARK: - API
     
     func fetchUsers() {
         
-        Database.database().reference().child("users").observe(.childAdded) { (snapshot) in
+        if userCurrentKey == nil {
             
-            // Grabing user id so we can construct our user
-            let uid = snapshot.key
-            
-            Database.fetchUser(with: uid, completion: { (user) in
+            USER_REF.queryLimited(toLast: 4).observeSingleEvent(of: .value) { (snapshot) in
                 
-                self.users.append(user)
-                self.tableView.reloadData()
+                guard let first = snapshot.children.allObjects.first as? DataSnapshot else { return }
+                guard let allObjects = snapshot.children.allObjects as? [DataSnapshot]else {return }
+                
+                allObjects.forEach({ (snapshot) in
+                    let uid = snapshot.key
+                    
+                    Database.fetchUser(with: uid, completion:  { (user) in
+                        self.users.append(user)
+                        self.tableView.reloadData()
+                    })
+                })
+                self.userCurrentKey = first.key
+            }
+        } else {
+            
+            USER_REF.queryOrderedByKey().queryEnding(atValue: userCurrentKey).queryLimited(toLast: 5).observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                guard let first = snapshot.children.allObjects.first as? DataSnapshot else { return }
+                guard let allObjects = snapshot.children.allObjects as? [DataSnapshot]else {return }
+                
+                allObjects.forEach( { (snapshot) in
+                    let uid = snapshot.key
+                    
+                    if uid != self.userCurrentKey {
+                        Database.fetchUser(with: uid, completion:  { (user) in
+                            self.users.append(user)
+                            self.tableView.reloadData()
+                        })
+                    }
+                })
+                self.currentKey = first.key
             })
         }
+        
     }
     
     func fetchPosts() {
         
-        posts.removeAll()
-        
-        POSTS_REF.observe(.childAdded) { (snapshot) in
+        if currentKey == nil {
             
-            let postId = snapshot.key
+            // Initial data pull
+            POSTS_REF.queryLimited(toLast: 18).observeSingleEvent(of: .value, with: { (snapshot) in
+              
+                guard let first = snapshot.children.allObjects.first as? DataSnapshot else { return }
+                guard let allObjects = snapshot.children.allObjects as? [DataSnapshot]else {return }
+                
+                allObjects.forEach( { (snapshot) in
+                    let postId = snapshot.key
+                    
+                    Database.fetchPost(with: postId, completion:  { (post) in
+                        self.posts.append(post)
+                        self.collectionView.reloadData()
+                    })
+                })
+                self.currentKey = first.key
+            })
+        } else {
             
-            Database.fetchPost(with: postId, completion:  { (post) in
-                self.posts.append(post)
-                self.collectionView.reloadData()
+            // Paginate here
+            POSTS_REF.queryOrderedByKey().queryEnding(atValue: self.currentKey).queryLimited(toLast: 10).observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                guard let first = snapshot.children.allObjects.first as? DataSnapshot else { return }
+                guard let allObjects = snapshot.children.allObjects as? [DataSnapshot]else {return }
+                
+                allObjects.forEach({ (snapshot) in
+                    let postId = snapshot.key
+                    
+                    if postId != self.currentKey {
+                        Database.fetchPost(with: postId, completion:  { (post) in
+                            self.posts.append(post)
+                            self.collectionView.reloadData()
+                        })
+                    }
+                })
+                self.currentKey = first.key
             })
         }
+        
     }
+    
 }
