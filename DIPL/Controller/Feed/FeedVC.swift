@@ -43,6 +43,7 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
         }
         
         updateUserFeeds()
+        
     }
     
     // MARK: - UICollectionViewFlowLayout
@@ -55,16 +56,19 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
         height += 60
         
         return CGSize(width: width, height: height)
+        
     }
 
     // MARK: - UICollectionViewDataSource
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
         if posts.count > 4 {
             if indexPath.item == posts.count - 1 {
                 fetchPosts()
             }
         }
+        
     }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -72,11 +76,13 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
         if viewSinglePost {
             return 1
         } else {
             return posts.count
         }
+        
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -88,6 +94,7 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
             if let post = self.post {
                 cell.post = post
             }
+            
         } else {
             cell.post = posts[indexPath.item]
         }
@@ -99,6 +106,7 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
         handleMentionTapped(forCell: cell)
         
         return cell
+        
     }
     
     // MARK: - FeedCellDelegate Protocol
@@ -343,5 +351,7 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
             })
             self.collectionView?.reloadData()
         }
+        
     }
+    
 }
