@@ -16,7 +16,7 @@ class Post {
     var imageUrl: String!
     var ownerUid: String!
     var creationDate: Date!
-    var postId: String?
+    var postId: String!
     var user: User?
     var didLike = false
     
@@ -95,6 +95,61 @@ class Post {
                 })
             })
         }
+    }
+    
+    func deletePost() {
+        
+        guard let currentUid = Auth.auth().currentUser?.uid else { return }
+        
+        // Remove from database
+        Storage.storage().reference(forURL: self.imageUrl).delete(completion: nil)
+        
+        // Remove from followers user feed structure
+        USER_FOLLOWER_REF.child(currentUid).observe(.childAdded) { (snapshot) in
+            let followerUid = snapshot.key
+            USER_FEED_REF.child(followerUid).child(self.postId).removeValue()
+        }
+        
+        // Remove from current user feed structure
+        USER_FEED_REF.child(currentUid).child(postId).removeValue()
+        
+        // Remove from current user post structure
+        USER_POSTS_REF.child(currentUid).child(postId).removeValue()
+        
+        // Removing likes
+        POST_LIKES_REF.child(postId).observe(.childAdded) { (snapshot) in
+            let uid = snapshot.key
+            
+            USER_LIKES_REF.child(self.postId).observeSingleEvent(of: .value, with: { (snapshot) in
+                guard let notificationId = snapshot.value as? String else { return }
+                
+                NOTIFICATIONS_REF.child(self.ownerUid).child(notificationId).removeValue(completionBlock: { (err, ref) in
+                    
+                    POST_LIKES_REF.child(self.postId).removeValue()
+                    
+                    USER_LIKES_REF.child(uid).child(self.postId).removeValue()
+                })
+            })
+        }
+        
+        // Remove our posts from hashtag structure
+        let words = caption.components(separatedBy: .whitespacesAndNewlines)
+        
+        for var word in words {
+            if word.hasPrefix("#") {
+                
+                word = word.trimmingCharacters(in: .punctuationCharacters)
+                word = word.trimmingCharacters(in: .symbols)
+                
+                HASHTAG_POST_REF.child(word).child(postId).removeValue()
+            }
+        }
+        
+        // Remove comments from COMMENT_REF structure
+        COMMENT_REF.child(postId).removeValue()
+        
+        // Remove posts from POST_REF structure
+        POSTS_REF.child(postId).removeValue()
     }
     
     func sendLikeNotificationToServer() {

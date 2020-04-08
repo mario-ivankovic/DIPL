@@ -86,6 +86,7 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! FeedCell
     
         cell.delegate = self
@@ -114,7 +115,6 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
     func handleUsernameTapped(for cell: FeedCell) {
         
         guard let post = cell.post else { return }
-        
         let userProfileVC = UserProfileVC(collectionViewLayout: UICollectionViewFlowLayout())
         
         userProfileVC.user = post.user
@@ -124,10 +124,39 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
     }
     
     func handleOptionsTapped(for cell: FeedCell) {
-        print("Handle options")
+        
+        guard let post = cell.post else { return }
+        
+        if post.ownerUid == Auth.auth().currentUser?.uid {
+            
+            let alertController = UIAlertController(title: "Options", message: nil, preferredStyle: .actionSheet)
+            
+            // Delete post
+            alertController.addAction(UIAlertAction(title: "Delete post", style: .destructive, handler: { (_) in
+                post.deletePost()
+                
+                if !self.viewSinglePost {
+                    self.handleRefresh()
+                } else {
+                    _ = self.navigationController?.popViewController(animated: true)
+                }
+            }))
+            
+            // Edit post
+            alertController.addAction(UIAlertAction(title: "Edit post", style: .default, handler: { (_) in
+                print("Edit post")
+            }))
+            
+            // Cancel
+            alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            
+            present(alertController, animated: true, completion: nil)
+        }
+        
     }
     
     func handleLikeTapped(for cell: FeedCell, isDoubleTap: Bool) {
+        
         guard let post = cell.post else { return }
         
         // If the user has already liked the post
@@ -148,9 +177,10 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
                 cell.likeButton.setImage(#imageLiteral(resourceName: "like_selected"), for: .normal)
             })
         }
+        
     }
     
-    
+
     func handleShowLikes(for cell: FeedCell) {
         guard let post = cell.post else { return }
         guard let postId = post.postId else { return }
