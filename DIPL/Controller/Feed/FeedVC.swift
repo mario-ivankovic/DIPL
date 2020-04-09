@@ -19,6 +19,7 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
     var viewSinglePost = false
     var post: Post?
     var currentKey: String?
+    var userProfileController: UserProfileVC?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -138,7 +139,12 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
                 if !self.viewSinglePost {
                     self.handleRefresh()
                 } else {
-                    _ = self.navigationController?.popViewController(animated: true)
+                    
+                    if let userProfileController = self.userProfileController {
+                        _ = self.navigationController?.popViewController(animated: true)
+                        userProfileController.handleRefresh()
+                    }
+                    
                 }
             }))
             

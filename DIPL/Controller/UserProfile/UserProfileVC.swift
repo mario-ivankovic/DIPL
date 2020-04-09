@@ -114,6 +114,7 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
         let feedVC = FeedVC(collectionViewLayout: UICollectionViewFlowLayout())
         
         feedVC.viewSinglePost = true
+        feedVC.userProfileController = self
         
         feedVC.post = posts[indexPath.item]
         
@@ -214,17 +215,22 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
     }
     
     // MARK: - Handlers
+    
     @objc func handleRefresh() {
+        
         posts.removeAll(keepingCapacity: false)
         self.currentKey = nil
         fetchPosts()
         collectionView?.reloadData()
+        
     }
     
     func configureRefreshControl() {
+        
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
         collectionView?.refreshControl = refreshControl
+        
     }
     
     // MARK: - API
@@ -256,6 +262,7 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
                 })
                 self.currentKey = first.key
             })
+            
         } else {
             
             USER_POSTS_REF.child(uid).queryOrderedByKey().queryEnding(atValue: self.currentKey).queryLimited(toLast: 7).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -274,6 +281,7 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
                 self.currentKey = first.key
             })
         }
+        
     }
     
     func fetchPost(withPostId postId: String) {
@@ -305,4 +313,5 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
         }
         
     }
+    
 }

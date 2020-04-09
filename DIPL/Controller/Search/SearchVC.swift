@@ -24,6 +24,8 @@ class SearchVC: UITableViewController, UISearchBarDelegate, UICollectionViewDele
     var posts = [Post]()
     var currentKey: String?
     var userCurrentKey: String?
+    
+    // MARK: - Init
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +41,9 @@ class SearchVC: UITableViewController, UISearchBarDelegate, UICollectionViewDele
         
         // Configure collection view
         configureCollectionView()
+        
+        // Configure refresh control
+        configureRefreshControl()
         
         // Fetch posts
         fetchPosts()
@@ -250,6 +255,25 @@ class SearchVC: UITableViewController, UISearchBarDelegate, UICollectionViewDele
         
     }
     
+    // MARK: - Handlers
+    
+    @objc func handleRefresh() {
+        
+        posts.removeAll(keepingCapacity: false)
+        self.currentKey = nil
+        fetchPosts()
+        collectionView?.reloadData()
+        
+    }
+    
+    func configureRefreshControl() {
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+        self.tableView?.refreshControl = refreshControl
+        
+    }
+    
     // MARK: - API
     
     func fetchUsers() {
@@ -301,8 +325,10 @@ class SearchVC: UITableViewController, UISearchBarDelegate, UICollectionViewDele
             // Initial data pull
             POSTS_REF.queryLimited(toLast: 18).observeSingleEvent(of: .value, with: { (snapshot) in
               
+                self.tableView.refreshControl?.endRefreshing()
+
                 guard let first = snapshot.children.allObjects.first as? DataSnapshot else { return }
-                guard let allObjects = snapshot.children.allObjects as? [DataSnapshot]else {return }
+                guard let allObjects = snapshot.children.allObjects as? [DataSnapshot] else { return }
                 
                 allObjects.forEach( { (snapshot) in
                     let postId = snapshot.key
