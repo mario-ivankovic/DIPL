@@ -43,6 +43,7 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
             fetchPosts()
         }
         
+        // Update user feed
         updateUserFeeds()
         
     }
@@ -137,26 +138,38 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
                 post.deletePost()
                 
                 if !self.viewSinglePost {
+                    
                     self.handleRefresh()
+                    
                 } else {
                     
                     if let userProfileController = self.userProfileController {
+                        
                         _ = self.navigationController?.popViewController(animated: true)
                         userProfileController.handleRefresh()
+                        
                     }
                     
                 }
+                
             }))
             
             // Edit post
             alertController.addAction(UIAlertAction(title: "Edit post", style: .default, handler: { (_) in
-                print("Edit post")
+                
+                let uploadPostController = UploadPostVC()
+                let navigationController = UINavigationController(rootViewController: uploadPostController)
+                uploadPostController.postToEdit = post
+                uploadPostController.uploadAction = UploadPostVC.UploadAction(index: 1)
+                self.present(navigationController, animated: true, completion: nil)
+                
             }))
             
             // Cancel
             alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             
             present(alertController, animated: true, completion: nil)
+            
         }
         
     }
@@ -170,11 +183,13 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
             
             // Handle unlike post
             if !isDoubleTap {
+                
                 post.adjustLikes(addLike: false, completion: { (likes) in
                     cell.likesLabel.text = "\(likes) likes"
                     cell.likeButton.setImage(#imageLiteral(resourceName: "like"), for: .normal)
                 })
             }
+            
         } else {
             
             // Handle like post
@@ -186,8 +201,8 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
         
     }
     
-
     func handleShowLikes(for cell: FeedCell) {
+        
         guard let post = cell.post else { return }
         guard let postId = post.postId else { return }
         
@@ -195,6 +210,7 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
         followLikeVC.viewingMode = FollowLikeVC.ViewingMode(index: 2)
         followLikeVC.postId = postId
         navigationController?.pushViewController(followLikeVC, animated: true)
+        
     }
     
     func handleConfigureLikeButton(for cell: FeedCell) {
@@ -210,28 +226,36 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
                 post.didLike = true
                 cell.likeButton.setImage(#imageLiteral(resourceName: "like_selected"), for: .normal)
             }
+            
         }
+        
     }
     
     func handleCommentTapped(for cell: FeedCell) {
+        
         guard let post = cell.post else { return }
         let commentVC = CommentVC(collectionViewLayout: UICollectionViewFlowLayout())
         commentVC.post = post
         navigationController?.pushViewController(commentVC, animated: true)
+        
     }
     
     // MARK: - Handlers
     
     @objc func handleRefresh() {
+        
         posts.removeAll(keepingCapacity: false)
         self.currentKey = nil
         fetchPosts()
         collectionView?.reloadData()
+        
     }
     
     @objc func handleShowMessages() {
+        
         let messagesController = MessagesController()
         navigationController?.pushViewController(messagesController, animated: true)
+        
     }
     
     func handleHashtagTapped(forCell cell: FeedCell) {
@@ -360,7 +384,9 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
                 })
                 self.currentKey = first.key
             })
+            
         } else {
+            
             USER_FEED_REF.child(currentUid).queryOrderedByKey().queryEnding(atValue: self.currentKey).queryLimited(toLast: 6).observeSingleEvent(of: .value, with: { (snapshot) in
                 
                 guard let first = snapshot.children.allObjects.first as? DataSnapshot else { return }
@@ -374,7 +400,9 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
                 })
                 self.currentKey = first.key
             })
+            
         }
+        
     }
     
     func fetchPost(withPostId postId: String) {

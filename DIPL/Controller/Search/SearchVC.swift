@@ -164,6 +164,7 @@ class SearchVC: UITableViewController, UISearchBarDelegate, UICollectionViewDele
                 fetchPosts()
             }
         }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -283,7 +284,7 @@ class SearchVC: UITableViewController, UISearchBarDelegate, UICollectionViewDele
             USER_REF.queryLimited(toLast: 4).observeSingleEvent(of: .value) { (snapshot) in
                 
                 guard let first = snapshot.children.allObjects.first as? DataSnapshot else { return }
-                guard let allObjects = snapshot.children.allObjects as? [DataSnapshot]else {return }
+                guard let allObjects = snapshot.children.allObjects as? [DataSnapshot] else { return }
                 
                 allObjects.forEach({ (snapshot) in
                     let uid = snapshot.key
@@ -300,7 +301,7 @@ class SearchVC: UITableViewController, UISearchBarDelegate, UICollectionViewDele
             USER_REF.queryOrderedByKey().queryEnding(atValue: userCurrentKey).queryLimited(toLast: 5).observeSingleEvent(of: .value, with: { (snapshot) in
                 
                 guard let first = snapshot.children.allObjects.first as? DataSnapshot else { return }
-                guard let allObjects = snapshot.children.allObjects as? [DataSnapshot]else {return }
+                guard let allObjects = snapshot.children.allObjects as? [DataSnapshot] else { return }
                 
                 allObjects.forEach( { (snapshot) in
                     let uid = snapshot.key
@@ -340,13 +341,14 @@ class SearchVC: UITableViewController, UISearchBarDelegate, UICollectionViewDele
                 })
                 self.currentKey = first.key
             })
+            
         } else {
             
             // Paginate here
             POSTS_REF.queryOrderedByKey().queryEnding(atValue: self.currentKey).queryLimited(toLast: 10).observeSingleEvent(of: .value, with: { (snapshot) in
                 
                 guard let first = snapshot.children.allObjects.first as? DataSnapshot else { return }
-                guard let allObjects = snapshot.children.allObjects as? [DataSnapshot]else {return }
+                guard let allObjects = snapshot.children.allObjects as? [DataSnapshot] else { return }
                 
                 allObjects.forEach({ (snapshot) in
                     let postId = snapshot.key
