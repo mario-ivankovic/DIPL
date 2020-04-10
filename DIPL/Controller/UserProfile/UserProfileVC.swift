@@ -142,14 +142,14 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
         guard let user = header.user else { return }
         
         // Edit profile controller
-        if header.editProfileFollowButton.titleLabel?.text == "Edit Profile" {/*
+        if header.editProfileFollowButton.titleLabel?.text == "Edit Profile" {
             
             let editProfileController = EditProfileController()
-            editProfileController.user = user
-            editProfileController.userProfileController = self
+      //      editProfileController.user = user
+        //    editProfileController.userProfileController = self
             let navigationController = UINavigationController(rootViewController: editProfileController)
             present(navigationController, animated: true, completion: nil)
-           */
+           
         } else {
             
             // Handle user follow/unfollow
