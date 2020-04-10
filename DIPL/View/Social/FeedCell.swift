@@ -241,7 +241,7 @@ class FeedCell: UICollectionViewCell {
             captionLabel.numberOfLines = 1
         }
         
-        postTimeLabel.text = "2 days ago"
+        postTimeLabel.text = post.creationDate.timeAgoToDisplay()
     }
     
     func configureActionButtons() {
