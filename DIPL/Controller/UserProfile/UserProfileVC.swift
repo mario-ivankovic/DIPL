@@ -145,8 +145,8 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
         if header.editProfileFollowButton.titleLabel?.text == "Edit Profile" {
             
             let editProfileController = EditProfileController()
-      //      editProfileController.user = user
-        //    editProfileController.userProfileController = self
+            editProfileController.user = user
+            editProfileController.userProfileController = self
             let navigationController = UINavigationController(rootViewController: editProfileController)
             present(navigationController, animated: true, completion: nil)
            

@@ -13,6 +13,12 @@ class EditProfileController: UIViewController {
     
     // MARK: - Properties
     
+    var user: User?
+    var imageChanged = false
+    var usernameChanged = false
+    var userProfileController: UserProfileVC?
+    var updatedUsername: String?
+    
     // Profile image
     let profileImageView: CustomImageView = {
         let iv = CustomImageView()
@@ -46,7 +52,7 @@ class EditProfileController: UIViewController {
     let fullnameTextField: UITextField = {
         let tf = UITextField()
         tf.textAlignment = .left
-        tf.borderStyle = .none
+        tf.isUserInteractionEnabled = false
         return tf
     }()
     
@@ -84,22 +90,48 @@ class EditProfileController: UIViewController {
         configureNavigationBar()
         
         configureViewComponents()
+        
+        usernameTextField.delegate = self
+        
+        loadUserData()
+        
     }
     
     // MARK: - Handlers
     
     @objc func handleChangeProfilePhoto() {
-        print("Handle change profile photo")
+        
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
+        present(imagePickerController, animated: true, completion: nil)
+        
     }
     
     @objc func handleCancel() {
-        
-        
+        self.dismiss(animated: true, completion: nil)
     }
     
     @objc func handleDone() {
         
+        view.endEditing(true)
         
+        if usernameChanged {
+            updateUsername()
+        }
+        
+        if imageChanged {
+            updateProfileImage()
+        }
+    }
+    
+    func loadUserData() {
+        
+        guard let user = self.user else { return }
+        
+        profileImageView.loadImage(with: user.profileImageUrl)
+        fullnameTextField.text = user.name
+        usernameTextField.text = user.username
     }
     
     func configureViewComponents() {
@@ -156,4 +188,90 @@ class EditProfileController: UIViewController {
     }
     
     // MARK: - API
+    
+    func updateUsername() {
+        
+        guard let updatedUsername = self.updatedUsername else { return }
+        guard let currentUid = Auth.auth().currentUser?.uid else { return }
+        guard usernameChanged == true else { return }
+        
+        USER_REF.child(currentUid).child("username").setValue(updatedUsername) { (err, ref) in
+            
+            guard let userProfileController = self.userProfileController else { return }
+            userProfileController.fetchCurrentUserData()
+            
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    func updateProfileImage() {
+        
+        guard imageChanged == true else { return }
+        guard let currentUid = Auth.auth().currentUser?.uid else { return }
+        guard let user = self.user else { return }
+        
+        Storage.storage().reference(forURL: user.profileImageUrl).delete(completion: nil)
+        
+        guard let updatedProfileImage = profileImageView.image else { return }
+        guard let imageData = UIImageJPEGRepresentation(updatedProfileImage, 0.3) else { return }
+        
+        STORAGE_PROFILE_IMAGES_REF.putData(imageData, metadata: nil) { (metadata, error) in
+            
+            if let error = error {
+                print("Failed to upload image to storage with error: ", error.localizedDescription)
+            }
+            
+            STORAGE_PROFILE_IMAGES_REF.downloadURL(completion: { (downloadURL, error) in
+                guard let updatedProfileImageUrl = downloadURL?.absoluteString else { return }
+                USER_REF.child(currentUid).child("profileImageUrl").setValue(updatedProfileImageUrl, withCompletionBlock:  { (err, ref) in
+                    
+                    guard let userProfileController = self.userProfileController else { return }
+                    userProfileController.fetchCurrentUserData()
+                    
+                    self.dismiss(animated: true, completion: nil)
+                })
+            })
+            
+        }
+        
+    }
+    
+}
+
+extension EditProfileController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        if let selectedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
+            profileImageView.image = selectedImage
+            self.imageChanged = true
+        }
+        
+        dismiss(animated: true, completion: nil)
+    }
+}
+
+extension EditProfileController: UITextFieldDelegate {
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        guard let user = self.user else { return }
+        
+        let trimmedString = usernameTextField.text?.replacingOccurrences(of: "\\s+$", with: "", options: .regularExpression)
+        
+        guard user.username != trimmedString else {
+            print("ERROR: You did not change your username")
+            usernameChanged = false
+            return
+        }
+        
+        guard trimmedString != "" else {
+            print("ERROR: Please enter a valid username")
+            usernameChanged = false
+            return
+        }
+        
+        updatedUsername = trimmedString?.lowercased()
+        usernameChanged = true
+    }
 }
