@@ -26,6 +26,8 @@
 		AC27B72123F2D21B00D31B35 /* FollowLikeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC27B72023F2D21B00D31B35 /* FollowLikeCell.swift */; };
 		AC46D3EC243A2480007CEF67 /* HashtagController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC46D3EB243A2480007CEF67 /* HashtagController.swift */; };
 		AC46D3EE243A269E007CEF67 /* HashtagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC46D3ED243A269E007CEF67 /* HashtagCell.swift */; };
+		AC48464B244360CD00887C59 /* CommentInputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC48464A244360CD00887C59 /* CommentInputAccessoryView.swift */; };
+		AC48464D244360E700887C59 /* CommentInputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC48464C244360E700887C59 /* CommentInputTextView.swift */; };
 		AC5A5E4F23E028B7008F258E /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A5E4E23E028B7008F258E /* LoginVC.swift */; };
 		AC5A5E5223E02BB1008F258E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A5E5123E02BB1008F258E /* Extensions.swift */; };
 		AC5A5E5423E18267008F258E /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A5E5323E18267008F258E /* SignUpVC.swift */; };
@@ -77,6 +79,8 @@
 		AC27B72023F2D21B00D31B35 /* FollowLikeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowLikeCell.swift; sourceTree = "<group>"; };
 		AC46D3EB243A2480007CEF67 /* HashtagController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashtagController.swift; sourceTree = "<group>"; };
 		AC46D3ED243A269E007CEF67 /* HashtagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashtagCell.swift; sourceTree = "<group>"; };
+		AC48464A244360CD00887C59 /* CommentInputAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentInputAccessoryView.swift; sourceTree = "<group>"; };
+		AC48464C244360E700887C59 /* CommentInputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentInputTextView.swift; sourceTree = "<group>"; };
 		AC5A5E4E23E028B7008F258E /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		AC5A5E5123E02BB1008F258E /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		AC5A5E5323E18267008F258E /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
@@ -206,6 +210,16 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		AC4846492443607D00887C59 /* Comments */ = {
+			isa = PBXGroup;
+			children = (
+				AC1B2326241A9EFD00E73FC2 /* CommentVC.swift */,
+				AC48464A244360CD00887C59 /* CommentInputAccessoryView.swift */,
+				AC48464C244360E700887C59 /* CommentInputTextView.swift */,
+			);
+			path = Comments;
+			sourceTree = "<group>";
+		};
 		AC5A5E5023E02B9C008F258E /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -247,8 +261,8 @@
 		ACA2EE4923EB63B600D121E4 /* Feed */ = {
 			isa = PBXGroup;
 			children = (
+				AC4846492443607D00887C59 /* Comments */,
 				AC224A4323E58CAB00F9F436 /* FeedVC.swift */,
-				AC1B2326241A9EFD00E73FC2 /* CommentVC.swift */,
 				AC46D3EB243A2480007CEF67 /* HashtagController.swift */,
 			);
 			path = Feed;
@@ -450,10 +464,12 @@
 				AC844F2023FA8347007CE733 /* UserPostCell.swift in Sources */,
 				ACF7F45023EC2511006A692E /* User.swift in Sources */,
 				ACE6825D2430FB75008DB6FD /* Message.swift in Sources */,
+				AC48464D244360E700887C59 /* CommentInputTextView.swift in Sources */,
 				AC6561BB23F73022008CF443 /* SelectImageVC.swift in Sources */,
 				AC6561BF23F7313F008CF443 /* SelectPhotoHeader.swift in Sources */,
 				ACE68251242FDEE7008DB6FD /* SearchPostCell.swift in Sources */,
 				AC46D3EC243A2480007CEF67 /* HashtagController.swift in Sources */,
+				AC48464B244360CD00887C59 /* CommentInputAccessoryView.swift in Sources */,
 				ACD869A124224C5F0029DABE /* NotificationCell.swift in Sources */,
 				AC27B71F23F2D18500D31B35 /* FollowLikeVC.swift in Sources */,
 				AC224A4223E583FD00F9F436 /* MainTabVC.swift in Sources */,
