@@ -185,7 +185,7 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
             if !isDoubleTap {
                 
                 post.adjustLikes(addLike: false, completion: { (likes) in
-                    cell.likesLabel.text = "\(likes) likes"
+                    cell.likesLabel.text = "\(likes) paws"
                     cell.likeButton.setImage(#imageLiteral(resourceName: "like"), for: .normal)
                 })
             }
@@ -194,7 +194,7 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
             
             // Handle like post
             post.adjustLikes(addLike: true, completion: { (likes) in
-                cell.likesLabel.text = "\(likes) likes"
+                cell.likesLabel.text = "\(likes) paws"
                 cell.likeButton.setImage(#imageLiteral(resourceName: "like_selected"), for: .normal)
             })
         }
@@ -224,7 +224,6 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
             // Check if post id exists in user-like structure
             if snapshot.hasChild(postId) {
                 post.didLike = true
-                cell.likeButton.setImage(#imageLiteral(resourceName: "like_selected"), for: .normal)
             }
             
         }

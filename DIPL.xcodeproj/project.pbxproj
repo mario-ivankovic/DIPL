@@ -626,6 +626,7 @@
 			baseConfigurationReference = FF816FAAD8FAEE1B895F8DDC /* Pods-DIPL.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = DIPL/DIPL.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = DIPL/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
@@ -645,6 +646,7 @@
 			baseConfigurationReference = 2FCABE42717773AB607A2266 /* Pods-DIPL.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = DIPL/DIPL.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = DIPL/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;

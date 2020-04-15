@@ -32,7 +32,7 @@ class FeedCell: UICollectionViewCell {
             
             postImageView.loadImage(with: imageUrl)
             
-            likesLabel.text = "\(likes) likes"
+            likesLabel.text = "\(likes) paws"
             configureLikeButton()
             
         }
@@ -109,19 +109,11 @@ class FeedCell: UICollectionViewCell {
         return button
     }()
     
-    // Save post button
-    let savePostButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setImage(#imageLiteral(resourceName: "ribbon"), for: .normal)
-        button.tintColor = .black
-        return button
-    }()
-    
     // Number of likes label
     lazy var likesLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 14)
-        label.text = "3 likes"
+        label.text = "3 paws"
         
         // Add gesture recognizer label
         let likeTap = UITapGestureRecognizer(target: self, action: #selector(handleShowLikes))
@@ -246,16 +238,14 @@ class FeedCell: UICollectionViewCell {
     
     func configureActionButtons() {
         
-        let stackView = UIStackView(arrangedSubviews: [likeButton, commentButton, messageButton])
+        let stackView = UIStackView(arrangedSubviews: [likeButton, commentButton])
         
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
         
         addSubview(stackView)
-        stackView.anchor(top: postImageView.bottomAnchor, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 120, height: 50)
+        stackView.anchor(top: postImageView.bottomAnchor, left: leftAnchor, bottom: nil, right: commentButton.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 80, height: 40)
         
-        addSubview(savePostButton)
-        savePostButton.anchor(top: postImageView.bottomAnchor, left: nil, bottom: nil, right: rightAnchor, paddingTop: 10, paddingLeft: 0, paddingBottom: 0, paddingRight: 10, width: 20, height: 24)
     }
     
     required init?(coder: NSCoder) {

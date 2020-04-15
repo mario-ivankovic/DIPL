@@ -130,7 +130,7 @@ class FollowLikeVC: UITableViewController, FollowCellDelegate {
         switch viewingMode {
         case .Followers: navigationItem.title = "Followers"
         case .Following: navigationItem.title = "Following"
-        case .Likes: navigationItem.title = "Likes"
+        case .Likes: navigationItem.title = "Paws"
         }
         
     }

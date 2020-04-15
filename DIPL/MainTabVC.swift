@@ -42,19 +42,19 @@ class MainTabVC: UITabBarController, UITabBarControllerDelegate {
     func configureViewControllers() {
         
         // Home feed controller
-        let feedVC = constructNavController(unselectedImage: #imageLiteral(resourceName: "anim-home_unselected"), selectedImage: #imageLiteral(resourceName: "anim-home_selected"), rootViewController: FeedVC(collectionViewLayout: UICollectionViewFlowLayout()))
+        let feedVC = constructNavController(unselectedImage: #imageLiteral(resourceName: "home_unselected"), selectedImage: #imageLiteral(resourceName: "home_selected"), rootViewController: FeedVC(collectionViewLayout: UICollectionViewFlowLayout()))
         
         // Search feed controller
-        let searchVC = constructNavController(unselectedImage: #imageLiteral(resourceName: "search-help_unselected"), selectedImage: #imageLiteral(resourceName: "search-help_selected"), rootViewController: SearchVC())
+        let searchVC = constructNavController(unselectedImage: #imageLiteral(resourceName: "search_unselected"), selectedImage: #imageLiteral(resourceName: "search_selected"), rootViewController: SearchVC())
         
         // Select image controller
         let selectImageVC = constructNavController(unselectedImage: #imageLiteral(resourceName: "plus_unselected"), selectedImage: #imageLiteral(resourceName: "plus_selected"))
         
         // Notification controller
-        let notificationVC = constructNavController(unselectedImage: #imageLiteral(resourceName: "bowl-like_unselected"), selectedImage: #imageLiteral(resourceName: "bowl-like_selected"), rootViewController: NotificationVC())
+        let notificationVC = constructNavController(unselectedImage: #imageLiteral(resourceName: "likes_unselected"), selectedImage: #imageLiteral(resourceName: "likes_selected"), rootViewController: NotificationVC())
         
         // Profile controller
-        let userProfileVC = constructNavController(unselectedImage: #imageLiteral(resourceName: "user-profile_unselected"), selectedImage: #imageLiteral(resourceName: "user-profile_selected"), rootViewController: UserProfileVC(collectionViewLayout: UICollectionViewFlowLayout()))
+        let userProfileVC = constructNavController(unselectedImage: #imageLiteral(resourceName: "profile_unselected"), selectedImage: #imageLiteral(resourceName: "profile_selected"), rootViewController: UserProfileVC(collectionViewLayout: UICollectionViewFlowLayout()))
         
         // View controller to be added to tab controller
         viewControllers = [feedVC, searchVC, selectImageVC, notificationVC, userProfileVC]
@@ -84,17 +84,9 @@ class MainTabVC: UITabBarController, UITabBarControllerDelegate {
         if UIDevice().userInterfaceIdiom == .phone {
             
             let tabBarHeight = tabBar.frame.height
-            
-            if UIScreen.main.nativeBounds.height == 2436 {
-                
-                // Configure dot for iPhone X
-                dot.frame = CGRect(x: view.frame.width / 5 * 3, y: view.frame.height - tabBarHeight, width: 6, height: 6)
-            } else {
-                
-                // Configure dot for other phone models
-                dot.frame = CGRect(x: view.frame.width / 5 * 3, y: view.frame.height - 16, width: 6, height: 6)
-
-            }
+        
+            // Configure dot for iPhone X
+            dot.frame = CGRect(x: view.frame.width / 5 * 3, y: view.frame.height - tabBarHeight, width: 6, height: 6)
             
             // Create dot
             dot.center.x = (view.frame.width / 5 * 3 + (view.frame.width / 5) / 2)
