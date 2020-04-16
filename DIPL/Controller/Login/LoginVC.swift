@@ -15,7 +15,7 @@ class LoginVC: UIViewController {
     let logoContainterView: UIView = {
         let view = UIView()
         
-        let logoImageView = UIImageView(image: #imageLiteral(resourceName: "pawby_logo"))// "image literal"
+        let logoImageView = UIImageView(image: #imageLiteral(resourceName: "coollogo_com-2752173"))// "image literal"
         logoImageView.contentMode = .scaleAspectFill
         view.addSubview(logoImageView)
         logoImageView.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
@@ -25,7 +25,7 @@ class LoginVC: UIViewController {
         logoImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
         // Background color
-        view.backgroundColor = UIColor(red: 0/255, green: 120/255, blue: 175/255, alpha: 1)
+        view.backgroundColor = UIColor(red: 0/255, green: 170/255, blue: 225/255, alpha: 1)
         
         return view
     }()
